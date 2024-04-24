@@ -1,8 +1,8 @@
 import os
 
-#####################################
+######################################
 ##### Projeto PySweet - Versão 1 #####
-#####################################
+######################################
 
 resp = ''
 while resp != '0':
@@ -62,12 +62,13 @@ while resp != '0':
         print()
         print("##### Projeto de Gestão de uma Fábrica de doces   ####")
         print("##### Equipe de desenvolvimento:                  ####")
-        print("##### Diana Rodrigues @dianarodrigues             ####")
+        print("##### Diana Rodrigues @dianarodrigues3            ####")
         print("##### Licença Pública Geral GNU                   ####")
         print("##### www.gnu.org/licenses/gpl.html               ####")
         print()
         input("Tecle <ENTER> para continuar...")
 
 
+print()
 print("Você encerrou o programa!")
 print("Até logo!")
