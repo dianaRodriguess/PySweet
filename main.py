@@ -1,7 +1,8 @@
 import os
 
+from dicionarios import cadastrarCliente
 ######################################
-##### Projeto PySweet - Versão 1 #####
+#####      Projeto PySweet       #####
 ######################################
 
 resp = ''
@@ -22,29 +23,60 @@ while resp != '0':
     if resp == '1':
         print()
         print("############################################")
-        print("#####   Você está no Módulo Cadastrar   ####")
+        print("#####         Módulo Cadastrar          ####")
         print("############################################")
+        print("#####   1 - Cadastrar Cliente          #####")
+        print("#####   2 - Cadastrar Venda            #####")
+        print("#####   3 - Cadastrar Produto          #####")
+        print("#####   0 - Sair                       #####")
         print()
-        input("Tecle <ENTER> para continuar...")
+        op_cadas = input("Tecle <ENTER> para continuar...")
+
+        if op_cadas == '1':
+          os.system('clear')
+          print("############################################")
+          print("#####           Cadastra Aluno         #####")
+          print("############################################")
+          print()
+          nome = input("##### Nome: ")
+          clientes.update({1: nome})
+          print()
+          telefone = input("##### Telefone: ")
+          print()
+          email = input("##### Email: ")
+          print()
+          endereço = input("##### Endereço: ")
     elif resp == '2':
         print()
         print("############################################")
-        print("#####   Você está no Módulo Pesquisar   ####")
+        print("#####          Módulo Pesquisar         ####")
         print("############################################")
+        print("#####   1 - Pesquisar Cliente          #####")
+        print("#####   2 - Pesquisar Venda            #####")
+        print("#####   3 - Pesquisar Produto          #####")
+        print("#####   0 - Sair                       #####")
         print()
         input("Tecle <ENTER> para continuar...")
     elif resp == '3':
         print()
         print("############################################")
-        print("#####   Você está no Módulo Atualizar   ####")
+        print("#####         Módulo Atualizar          ####")
         print("############################################")
+        print("#####   1 - Atualizar Cliente          #####")
+        print("#####   2 - Atualizar Venda            #####")
+        print("#####   3 - Atualizar Produto          #####")
+        print("#####   0 - Sair                       #####")
         print()
         input("Tecle <ENTER> para continuar...")
     elif resp == '4':
         print()
         print("############################################")
-        print("#####    Você está no Módulo Deletar    ####")
+        print("#####           Módulo Deletar          ####")
         print("############################################")
+        print("#####   1 - Deletar Cliente            #####")
+        print("#####   2 - Deletar Venda              #####")
+        print("#####   3 - Deletar Produto            #####")
+        print("#####   0 - Sair                       #####")
         print()
         input("Tecle <ENTER> para continuar...")
     elif resp == '5':
@@ -52,6 +84,12 @@ while resp != '0':
         print("############################################")
         print("#####   Você está no Módulo Relatório   ####")
         print("############################################")
+        print("#####   1 - Produtos mais vendidos     #####")
+        print("#####   2 - Produtos menos vendidos    #####")
+        print("#####   3 - Produtos com menor estoque #####")
+        print("#####   4 - Maiores compradores        #####")
+        print("#####   5 - Datas que mais vendem      #####")
+        print("#####   0 - Sair                       #####")
         print()
         input("Tecle <ENTER> para continuar...")
     elif resp == '6':
@@ -63,6 +101,7 @@ while resp != '0':
         print("##### Projeto de Gestão de uma Fábrica de doces   ####")
         print("##### Equipe de desenvolvimento:                  ####")
         print("##### Diana Rodrigues @dianarodrigues3            ####")
+        print("##### Flavius Gorgônio @flgorgonio                ####")
         print("##### Licença Pública Geral GNU                   ####")
         print("##### www.gnu.org/licenses/gpl.html               ####")
         print()
