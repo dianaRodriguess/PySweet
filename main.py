@@ -1,112 +1,115 @@
 import os
 
-from dicionarios import cadastrarCliente
+from funcoes import (
+    atualizarCliente,
+    atualizarProduto,
+    atualizarVenda,
+    deletarCliente,
+    deletarProduto,
+    deletarVenda,
+    dtMaisVendem,
+    informacoes,
+    maioresCompradores,
+    menuPrincipal,
+    menuCadastrar,
+    menuAtualizar,
+    menuPesquisar,
+    menuDeletar,
+    menuRelatorio,
+    cadastrarCliente,
+    cadastrarVenda,
+    cadastrarProduto,
+    pesquisarCliente,
+    pesquisarProduto,
+    pesquisarVenda,
+    prdtMaisEstoque,
+    prdtMaisVend,
+    prdtMenosEstoque,
+    prdtMenosVend,
+)
+
 ######################################
 #####      Projeto PySweet       #####
 ######################################
 
-resp = ''
-while resp != '0':
-    os.system('clear')
-    print("############################################")
-    print("######       Projeto PySweet       ######")
-    print("############################################")
-    print("#####      1 - Módulo Cadastrar        #####")
-    print("#####      2 - Módulo Pesquisar        #####")
-    print("#####      3 - Módulo Atualizar        #####")
-    print("#####      4 - Módulo Deletar          #####")
-    print("#####      5 - Módulo Relatório        #####")
-    print("#####      6 - Módulo Informações      #####")
-    print("#####      0 - Sair                    #####")
-    resp = input("##### Escolha sua opção: ")
+op_mprinc = ""
+while op_mprinc != "0":
+    op_mprinc = menuPrincipal()
 
-    if resp == '1':
-        print()
-        print("############################################")
-        print("#####         Módulo Cadastrar          ####")
-        print("############################################")
-        print("#####   1 - Cadastrar Cliente          #####")
-        print("#####   2 - Cadastrar Venda            #####")
-        print("#####   3 - Cadastrar Produto          #####")
-        print("#####   0 - Sair                       #####")
-        print()
-        op_cadas = input("Tecle <ENTER> para continuar...")
+# CADASTRAR
+    if op_mprinc == "1":
+        op_mcadas = ""
+        while op_mcadas != "0":
+            op_mcadas = menuCadastrar()
+            print()
 
-        if op_cadas == '1':
-          os.system('clear')
-          print("############################################")
-          print("#####           Cadastra Aluno         #####")
-          print("############################################")
-          print()
-          nome = input("##### Nome: ")
-          clientes.update({1: nome})
-          print()
-          telefone = input("##### Telefone: ")
-          print()
-          email = input("##### Email: ")
-          print()
-          endereço = input("##### Endereço: ")
-    elif resp == '2':
-        print()
-        print("############################################")
-        print("#####          Módulo Pesquisar         ####")
-        print("############################################")
-        print("#####   1 - Pesquisar Cliente          #####")
-        print("#####   2 - Pesquisar Venda            #####")
-        print("#####   3 - Pesquisar Produto          #####")
-        print("#####   0 - Sair                       #####")
-        print()
-        input("Tecle <ENTER> para continuar...")
-    elif resp == '3':
-        print()
-        print("############################################")
-        print("#####         Módulo Atualizar          ####")
-        print("############################################")
-        print("#####   1 - Atualizar Cliente          #####")
-        print("#####   2 - Atualizar Venda            #####")
-        print("#####   3 - Atualizar Produto          #####")
-        print("#####   0 - Sair                       #####")
-        print()
-        input("Tecle <ENTER> para continuar...")
-    elif resp == '4':
-        print()
-        print("############################################")
-        print("#####           Módulo Deletar          ####")
-        print("############################################")
-        print("#####   1 - Deletar Cliente            #####")
-        print("#####   2 - Deletar Venda              #####")
-        print("#####   3 - Deletar Produto            #####")
-        print("#####   0 - Sair                       #####")
-        print()
-        input("Tecle <ENTER> para continuar...")
-    elif resp == '5':
-        print()
-        print("############################################")
-        print("#####   Você está no Módulo Relatório   ####")
-        print("############################################")
-        print("#####   1 - Produtos mais vendidos     #####")
-        print("#####   2 - Produtos menos vendidos    #####")
-        print("#####   3 - Produtos com menor estoque #####")
-        print("#####   4 - Maiores compradores        #####")
-        print("#####   5 - Datas que mais vendem      #####")
-        print("#####   0 - Sair                       #####")
-        print()
-        input("Tecle <ENTER> para continuar...")
-    elif resp == '6':
-        print()
-        print("############################################")
-        print("#####  Você está no Módulo Informações  ####")
-        print("############################################")
-        print()
-        print("##### Projeto de Gestão de uma Fábrica de doces   ####")
-        print("##### Equipe de desenvolvimento:                  ####")
-        print("##### Diana Rodrigues @dianarodrigues3            ####")
-        print("##### Flavius Gorgônio @flgorgonio                ####")
-        print("##### Licença Pública Geral GNU                   ####")
-        print("##### www.gnu.org/licenses/gpl.html               ####")
-        print()
-        input("Tecle <ENTER> para continuar...")
+            if op_mcadas == "1":
+                cadastrarCliente()
+            elif op_mcadas == "2":
+                cadastrarVenda()
+            elif op_mcadas == "3":
+                cadastrarProduto()
+# PESQUISAR
+    elif op_mprinc == "2":
+        op_mpesq = ""
+        while op_mpesq != "0":
+            op_mpesq = menuPesquisar()
+            print()
 
+            if op_mpesq == "1":
+                pesquisarCliente()
+            elif op_mpesq == "2":
+                pesquisarVenda()
+            elif op_mpesq == "3":
+                pesquisarProduto()
+# ATUALIZAR
+    elif op_mprinc == "3":
+        op_matua = ""
+        while op_matua != "0":
+            op_matua = menuAtualizar()
+            print()
+
+            if op_matua == "1":
+                atualizarCliente()
+            elif op_matua == "2":
+                atualizarVenda()
+            elif op_matua == "3":
+                atualizarProduto()
+# DELETAR
+    elif op_mprinc == "4":
+        op_mdele = ""
+        while op_mdele != "0":
+            op_mdele = menuDeletar()
+            print()
+
+            if op_mdele == "1":
+                deletarCliente()
+            elif op_mdele == "2":
+                deletarVenda()
+            elif op_mdele == "3":
+                deletarProduto()
+# RELATÓRIO
+    elif op_mprinc == "5":
+        op_mrela = ""
+        while op_mrela != "0":
+            op_mrela = menuRelatorio()
+            print()
+
+            if op_mrela == "1":
+                prdtMaisVend()
+            elif op_mrela == "2":
+                prdtMenosVend()
+            elif op_mrela == "3":
+                prdtMaisEstoque()
+            elif op_mrela == "4":
+                prdtMenosEstoque()
+            elif op_mrela == "5":
+                maioresCompradores()
+            elif op_mrela == "6":
+                dtMaisVendem()
+# INFORMAÇÕES
+    elif op_mprinc == "6":
+        informacoes()
 
 print()
 print("Você encerrou o programa!")
