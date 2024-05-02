@@ -1,4 +1,5 @@
 import os
+# import datetime
 from dicionarios import clientes, produtos, vendas
 
 
@@ -60,6 +61,7 @@ def cadastrarCliente():
     #   print(type(id))
     #   clientes.update({f"{id}": [nome, telefone, email, endereço]})
     print(clientes)
+    print()
     print("Cliente cadastrado com sucesso!!")
     input("Tecle <ENTER> para continuar... ")
 
@@ -70,6 +72,31 @@ def cadastrarVenda():
     print("#####           Cadastrar Venda        #####")
     print("############################################")
     print()
+    nome_produto = input("Produto vendido: ")
+    print()
+    nome_cliente = input("Qual o nome do cliente? ")
+    print()
+    qtd_vendida = input("Quantidade vendida: ")
+    print()
+    forma_pagamento = input("Forma de pagamento: ")
+
+    if nome_produto in produtos.keys():        
+        if nome_cliente in clientes.keys():
+            
+            id = vendas.__len__() + 1
+            id = str(id)
+            vendas[id] = [nome_produto, nome_cliente, qtd_vendida, forma_pagamento]
+            cliente = clientes[vendas[id][1]][0]
+            print("Nome do cliente: ", cliente)
+            produto = produtos[vendas[id][0]][0]
+            print("Produto: ", produto)
+    else:
+        print("Produto não encotrado. ")
+        
+    
+    
+    print()
+    print("Venda cadastrado com sucesso!!")
     input("Tecle <ENTER> para continuar... ")
 
 
@@ -79,6 +106,17 @@ def cadastrarProduto():
     print("#####           Cadastrar Produto      #####")
     print("############################################")
     print()
+    nome = input("Nome: ")
+    print()
+    qtd_produto = input("Quantidade: ")
+
+    id = produtos.__len__() + 1
+    id = str(id)
+    produtos[id] = [nome, qtd_produto]
+
+    print(produtos)
+    print()
+    print("Produto cadastrado com sucesso!!")
     input("Tecle <ENTER> para continuar... ")
 
 
@@ -106,6 +144,10 @@ def pesquisarCliente():
     print("#####          Pesquisar Cliente       #####")
     print("############################################")
     print()
+    id_cliente = input("Qual o id do cliente? ")
+
+    if id_cliente in clientes.keys():
+        print(clientes[id_cliente])
     input("Tecle <ENTER> para continuar... ")
 
 
