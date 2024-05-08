@@ -1,5 +1,6 @@
 import os
-# import datetime
+import time
+from datetime import datetime
 from dicionarios import clientes, produtos, vendas
 
 
@@ -36,7 +37,7 @@ def menuCadastrar():
     print("#####   3 - Cadastrar Produto          #####")
     print("#####   0 - Sair                       #####")
     print()
-    op_mcadas = input("Tecle <ENTER> para continuar... ")
+    op_mcadas = input("##### Escolha sua opção: ")
     return op_mcadas
 
 
@@ -46,24 +47,34 @@ def cadastrarCliente():
     print("#####           Cadastrar Cliente      #####")
     print("############################################")
     print()
-    nome = input("##### Nome: ")
+    nome_cliente = input("##### Nome: ")
     print()
-    telefone = input("##### Telefone: ")
+    telefone_cliente = input("##### Telefone: ")
     print()
-    email = input("##### Email: ")
+    email_cliente = input("##### Email: ")
     print()
-    endereço = input("##### Endereço: ")
+    endereço_cliente = input("##### Endereço: ")
 
     id = clientes.__len__() + 1
-    #   id = clientes
     id = str(id)
-    clientes[id] = [nome, telefone, email, endereço]
-    #   print(type(id))
-    #   clientes.update({f"{id}": [nome, telefone, email, endereço]})
-    print(clientes)
+    clientes[id] = [nome_cliente, telefone_cliente, email_cliente, endereço_cliente]
+    
+    cliente = clientes[id][0]
+    telefone = clientes[id][1]
+    email = clientes[id][2]
+    endereco = clientes[id][3]
     print()
     print("Cliente cadastrado com sucesso!!")
+    print()
+    print(f"Nome: {cliente}")
+    print(f"Telefone: {telefone}")
+    print(f"Email: {email}")
+    print(f"Endereço: {endereco}")
+    print()
     input("Tecle <ENTER> para continuar... ")
+
+
+# def calcularPreco():
 
 
 def cadastrarVenda():
@@ -72,31 +83,56 @@ def cadastrarVenda():
     print("#####           Cadastrar Venda        #####")
     print("############################################")
     print()
-    nome_produto = input("Produto vendido: ")
+    id_produto = input("##### Produto vendido: ")
     print()
-    nome_cliente = input("Qual o nome do cliente? ")
+    id_cliente = input("##### Cliente: ")
     print()
-    qtd_vendida = input("Quantidade vendida: ")
+    qtd_vendida = input("##### Quantidade vendida: ")
     print()
-    forma_pagamento = input("Forma de pagamento: ")
+    forma_pagamento = input(
+        "##### Forma de pagamento: \n##### 1 - Cartão de Débito \n##### 2 - Cartão de Crédito \n##### 3 - Espécie \n##### 4 - PIX \n: "
+    )
 
-    if nome_produto in produtos.keys():        
-        if nome_cliente in clientes.keys():
-            
+    if forma_pagamento == "1":
+        forma_pagamento = "Cartão Débito"
+    elif forma_pagamento == "2":
+        forma_pagamento = "Cartão Crédito"
+    elif forma_pagamento == "3":
+        forma_pagamento = "Espécie"
+    elif forma_pagamento == "4":
+        forma_pagamento = "PIX"
+    else:
+        print("Forma de pagamento inválida. Retornaremos ao Menu Cadastrar")
+        # time.sleep(3)
+        # menuCadastrar()
+    data = datetime.now()
+
+    if id_produto in produtos.keys():
+        if id_cliente in clientes.keys():
+
             id = vendas.__len__() + 1
             id = str(id)
-            vendas[id] = [nome_produto, nome_cliente, qtd_vendida, forma_pagamento]
+            vendas[id] = [
+                id_produto,
+                id_cliente,
+                qtd_vendida,
+                forma_pagamento,
+                data.strftime("%x, %X"),
+            ]
+            
             cliente = clientes[vendas[id][1]][0]
-            print("Nome do cliente: ", cliente)
             produto = produtos[vendas[id][0]][0]
-            print("Produto: ", produto)
+            print()
+            print("Venda cadastrado com sucesso!!")
+            print()
+            print(f"Nome do cliente: {cliente}")
+            print(f"Produto: {produto}")
+            print(f"Quantidade: {qtd_vendida}") 
+            print(f"Forma de pagamento: {forma_pagamento}")
+            print(f"Data: {data.strftime("%x às %X")}")
     else:
         print("Produto não encotrado. ")
-        
-    
-    
-    print()
-    print("Venda cadastrado com sucesso!!")
+
     input("Tecle <ENTER> para continuar... ")
 
 
@@ -106,17 +142,26 @@ def cadastrarProduto():
     print("#####           Cadastrar Produto      #####")
     print("############################################")
     print()
-    nome = input("Nome: ")
+    nome_produto = input("Nome: ")
     print()
     qtd_produto = input("Quantidade: ")
+    print()
+    preco_produto = input("Preço: ")
 
     id = produtos.__len__() + 1
     id = str(id)
-    produtos[id] = [nome, qtd_produto]
+    produtos[id] = [nome_produto, qtd_produto, preco_produto]
 
-    print(produtos)
+    produto = produtos[id][0]
+    quantidade = produtos[id][1]
+    preco = produtos[id][2]
+    
+    print("\nProduto cadastrado com sucesso!!")
     print()
-    print("Produto cadastrado com sucesso!!")
+    print(f"Nome do produto: {produto}")
+    print(f"Quantidade: {quantidade}")
+    print(f"Preço da unidade: R$ {preco}")
+    print()
     input("Tecle <ENTER> para continuar... ")
 
 
@@ -134,7 +179,7 @@ def menuPesquisar():
     print("#####   3 - Pesquisar Produto          #####")
     print("#####   0 - Sair                       #####")
     print()
-    op_mpesq = input("Tecle <ENTER> para continuar... ")
+    op_mpesq = input("##### Escolha sua opção: ")
     return op_mpesq
 
 
@@ -183,7 +228,7 @@ def menuAtualizar():
     print("#####   3 - Atualizar Produto          #####")
     print("#####   0 - Sair                       #####")
     print()
-    op_matua = input("Tecle <ENTER> para continuar... ")
+    op_matua = input("##### Escolha sua opção: ")
     return op_matua
 
 
@@ -228,7 +273,7 @@ def menuDeletar():
     print("#####   3 - Deletar Produto            #####")
     print("#####   0 - Sair                       #####")
     print()
-    op_mdele = input("Tecle <ENTER> para continuar... ")
+    op_mdele = input("##### Escolha sua opção: ")
     return op_mdele
 
 
@@ -276,7 +321,7 @@ def menuRelatorio():
     print("#####   6 - Datas que mais vendem      #####")
     print("#####   0 - Sair                       #####")
     print()
-    op_mrela = input("Tecle <ENTER> para continuar... ")
+    op_mrela = input("##### Escolha sua opção: ")
     return op_mrela
 
 
