@@ -32,11 +32,12 @@ from funcoes import (
 #####      Projeto PySweet       #####
 ######################################
 
+# MENU PRINCIPAL
 op_mprinc = ""
 while op_mprinc != "0":
     op_mprinc = menuPrincipal()
 
-# CADASTRAR
+    # MÓDULO CADASTRAR
     if op_mprinc == "1":
         op_mcadas = ""
         while op_mcadas != "0":
@@ -49,7 +50,7 @@ while op_mprinc != "0":
                 cadastrarVenda()
             elif op_mcadas == "3":
                 cadastrarProduto()
-# PESQUISAR
+    # MÓDULO PESQUISAR
     elif op_mprinc == "2":
         op_mpesq = ""
         while op_mpesq != "0":
@@ -62,7 +63,7 @@ while op_mprinc != "0":
                 pesquisarVenda()
             elif op_mpesq == "3":
                 pesquisarProduto()
-# ATUALIZAR
+    # MÓDULO ATUALIZAR
     elif op_mprinc == "3":
         op_matua = ""
         while op_matua != "0":
@@ -75,7 +76,7 @@ while op_mprinc != "0":
                 atualizarVenda()
             elif op_matua == "3":
                 atualizarProduto()
-# DELETAR
+    # MÓDULO DELETAR
     elif op_mprinc == "4":
         op_mdele = ""
         while op_mdele != "0":
@@ -88,7 +89,7 @@ while op_mprinc != "0":
                 deletarVenda()
             elif op_mdele == "3":
                 deletarProduto()
-# RELATÓRIO
+    # MÓDULO RELATÓRIO
     elif op_mprinc == "5":
         op_mrela = ""
         while op_mrela != "0":
@@ -107,7 +108,7 @@ while op_mprinc != "0":
                 maioresCompradores()
             elif op_mrela == "6":
                 dtMaisVendem()
-# INFORMAÇÕES
+    # MÓDULO INFORMAÇÕES
     elif op_mprinc == "6":
         informacoes()
 
