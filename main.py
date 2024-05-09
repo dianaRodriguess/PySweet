@@ -33,6 +33,8 @@ from funcoes import (
 ######################################
 
 # MENU PRINCIPAL
+
+# função para ler os dados do arquivo e coloca no dicio 
 op_mprinc = ""
 while op_mprinc != "0":
     op_mprinc = menuPrincipal()
@@ -115,3 +117,5 @@ while op_mprinc != "0":
 print()
 print("Você encerrou o programa!")
 print("Até logo!")
+
+# função ler o dicio e  escreve nos arquivos

@@ -1,3 +1,5 @@
+import json
+import pickle
 import os
 import time
 from datetime import datetime
@@ -129,7 +131,7 @@ def cadastrarVenda():
             print(f"Produto: {produto}")
             print(f"Quantidade: {qtd_vendida}") 
             print(f"Forma de pagamento: {forma_pagamento}")
-            print(f"Data: {data.strftime("%x às %X")}")
+            print("Data: ", data.strftime("%x às %X"))
     else:
         print("Produto não encotrado. ")
 
@@ -182,7 +184,7 @@ def menuPesquisar():
     op_mpesq = input("##### Escolha sua opção: ")
     return op_mpesq
 
-
+# TODO: deixar mais bonito
 def pesquisarCliente():
     os.system("clear")
     print("############################################")
@@ -191,8 +193,24 @@ def pesquisarCliente():
     print()
     id_cliente = input("Qual o id do cliente? ")
 
+    # # read
+    # aqvjson = open("clientes.json", "r")
+    # jsondata = aqvjson.read()
+
+    # # parse
+    # obj = json.loads(jsondata)
+    # lista = obj[id_cliente]
+    # cliente = lista[0]
+    # telefone = lista[1]
+    # email = lista[2]
+    # endereço = lista[3]
+    
     if id_cliente in clientes.keys():
-        print(clientes[id_cliente])
+        print()
+        print("Nome: ", clientes[id_cliente][0])
+        print("Telefone: ", clientes[id_cliente][1])
+        print("Email: ", clientes[id_cliente][2])
+        print("Endereço: ", clientes[id_cliente][3])
     input("Tecle <ENTER> para continuar... ")
 
 
