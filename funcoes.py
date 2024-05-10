@@ -5,6 +5,28 @@ import time
 from datetime import datetime
 from dicionarios import clientes, produtos, vendas
 
+# def carregarArquivos():
+#     try:
+#         arq_clientes = open("clientes.dat", "rb")
+#         clientes = pickle.load(arq_clientes)
+#     except:
+#         arq_clientes = open("clientes.dat", "wb")
+#     arq_clientes.close()
+
+# carregarArquivos()
+
+def escreverArquivos():
+    arq_clientes = open("clientes.dat", "wb")
+    pickle.dump(clientes, arq_clientes)
+    arq_clientes.close()
+    
+    arq_produtos = open("produtos.dat", "wb")
+    pickle.dump(produtos, arq_produtos)
+    arq_produtos.close()
+    
+    arq_vendas = open("vendas.dat", "wb")
+    pickle.dump(vendas, arq_vendas)
+    arq_vendas.close()
 
 #########################
 ##### MENU PRICIPAL #####
@@ -72,7 +94,9 @@ def cadastrarCliente():
     print(f"Telefone: {telefone}")
     print(f"Email: {email}")
     print(f"Endereço: {endereco}")
+    print("Id de cadastro: ", id)
     print()
+    
     input("Tecle <ENTER> para continuar... ")
 
 
@@ -132,6 +156,8 @@ def cadastrarVenda():
             print(f"Quantidade: {qtd_vendida}") 
             print(f"Forma de pagamento: {forma_pagamento}")
             print("Data: ", data.strftime("%x às %X"))
+            print("Id de cadastro: ", id)
+            print()
     else:
         print("Produto não encotrado. ")
 
@@ -163,6 +189,7 @@ def cadastrarProduto():
     print(f"Nome do produto: {produto}")
     print(f"Quantidade: {quantidade}")
     print(f"Preço da unidade: R$ {preco}")
+    print("Id de cadastro: ", id)
     print()
     input("Tecle <ENTER> para continuar... ")
 
@@ -211,6 +238,9 @@ def pesquisarCliente():
         print("Telefone: ", clientes[id_cliente][1])
         print("Email: ", clientes[id_cliente][2])
         print("Endereço: ", clientes[id_cliente][3])
+        print()
+    else:
+        print("Não foi possível encontrar o cliente. Tem certeza que ele está cadastrado? ")
     input("Tecle <ENTER> para continuar... ")
 
 
@@ -220,6 +250,19 @@ def pesquisarVenda():
     print("#####           Pesquisar Venda        #####")
     print("############################################")
     print()
+    id_venda = input("Qual o id da venda? ")
+    
+    produto = produtos[vendas[id_venda][0]][0]
+    cliente = clientes[vendas[id_venda][1]][0]
+    
+    if id_venda in vendas.keys():
+        print()
+        print("Comprador: ", cliente)
+        print("Produto vendido: ", produto)
+        print("Quantidade vendida: ", vendas[id_venda][2])
+        print("Data: ", vendas[id_venda][3])
+        print("Forma de pagamento: ", vendas[id_venda][4])
+        print()
     input("Tecle <ENTER> para continuar... ")
 
 
@@ -229,6 +272,14 @@ def pesquisarProduto():
     print("#####           Pesquisar Produto      #####")
     print("############################################")
     print()
+    id_produto = input("Qual o id do produto? ")
+    
+    if id_produto in produtos.keys():
+        print()
+        print("Produto: ", produtos[id_produto][0])
+        print("Quantidade: ", produtos[id_produto][1])
+        print("Preço: ", produtos[id_produto][2])
+        print()
     input("Tecle <ENTER> para continuar... ")
 
 
@@ -417,3 +468,5 @@ def informacoes():
     input("Tecle <ENTER> para continuar... ")
     # op_minfo = input("Tecle <ENTER> para continuar... ")
     # return op_minfo
+
+escreverArquivos()
