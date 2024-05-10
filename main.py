@@ -1,5 +1,5 @@
 import os
-
+import dicionarios
 from funcoes import (
     atualizarCliente,
     atualizarProduto,
@@ -26,6 +26,8 @@ from funcoes import (
     prdtMaisVend,
     prdtMenosEstoque,
     prdtMenosVend,
+    # carregarArquivos,
+    escreverArquivos
 )
 
 ######################################
@@ -35,6 +37,8 @@ from funcoes import (
 # MENU PRINCIPAL
 
 # função para ler os dados do arquivo e coloca no dicio 
+# carregarArquivos()
+
 op_mprinc = ""
 while op_mprinc != "0":
     op_mprinc = menuPrincipal()
@@ -119,3 +123,4 @@ print("Você encerrou o programa!")
 print("Até logo!")
 
 # função ler o dicio e  escreve nos arquivos
+escreverArquivos()
