@@ -1,4 +1,3 @@
-import json
 import pickle
 import os
 import time
@@ -15,18 +14,20 @@ from dicionarios import clientes, produtos, vendas
 
 # carregarArquivos()
 
+
 def escreverArquivos():
     arq_clientes = open("clientes.dat", "wb")
     pickle.dump(clientes, arq_clientes)
     arq_clientes.close()
-    
+
     arq_produtos = open("produtos.dat", "wb")
     pickle.dump(produtos, arq_produtos)
     arq_produtos.close()
-    
+
     arq_vendas = open("vendas.dat", "wb")
     pickle.dump(vendas, arq_vendas)
     arq_vendas.close()
+
 
 #########################
 ##### MENU PRICIPAL #####
@@ -81,8 +82,10 @@ def cadastrarCliente():
 
     id = clientes.__len__() + 1
     id = str(id)
-    clientes[id] = [nome_cliente, telefone_cliente, email_cliente, endereço_cliente]
-    
+    clientes[id] = [
+        nome_cliente, telefone_cliente, email_cliente, endereço_cliente
+    ]
+
     cliente = clientes[id][0]
     telefone = clientes[id][1]
     email = clientes[id][2]
@@ -96,7 +99,7 @@ def cadastrarCliente():
     print(f"Endereço: {endereco}")
     print("Id de cadastro: ", id)
     print()
-    
+
     input("Tecle <ENTER> para continuar... ")
 
 
@@ -145,7 +148,7 @@ def cadastrarVenda():
                 forma_pagamento,
                 data.strftime("%x, %X"),
             ]
-            
+
             cliente = clientes[vendas[id][1]][0]
             produto = produtos[vendas[id][0]][0]
             print()
@@ -153,7 +156,7 @@ def cadastrarVenda():
             print()
             print(f"Nome do cliente: {cliente}")
             print(f"Produto: {produto}")
-            print(f"Quantidade: {qtd_vendida}") 
+            print(f"Quantidade: {qtd_vendida}")
             print(f"Forma de pagamento: {forma_pagamento}")
             print("Data: ", data.strftime("%x às %X"))
             print("Id de cadastro: ", id)
@@ -183,7 +186,7 @@ def cadastrarProduto():
     produto = produtos[id][0]
     quantidade = produtos[id][1]
     preco = produtos[id][2]
-    
+
     print("\nProduto cadastrado com sucesso!!")
     print()
     print(f"Nome do produto: {produto}")
@@ -211,6 +214,7 @@ def menuPesquisar():
     op_mpesq = input("##### Escolha sua opção: ")
     return op_mpesq
 
+
 # TODO: deixar mais bonito
 def pesquisarCliente():
     os.system("clear")
@@ -231,7 +235,7 @@ def pesquisarCliente():
     # telefone = lista[1]
     # email = lista[2]
     # endereço = lista[3]
-    
+
     if id_cliente in clientes.keys():
         print()
         print("Nome: ", clientes[id_cliente][0])
@@ -240,7 +244,9 @@ def pesquisarCliente():
         print("Endereço: ", clientes[id_cliente][3])
         print()
     else:
-        print("Não foi possível encontrar o cliente. Tem certeza que ele está cadastrado? ")
+        print(
+            "Não foi possível encontrar o cliente. Tem certeza que ele está cadastrado? "
+        )
     input("Tecle <ENTER> para continuar... ")
 
 
@@ -250,11 +256,12 @@ def pesquisarVenda():
     print("#####           Pesquisar Venda        #####")
     print("############################################")
     print()
+    print(vendas)
     id_venda = input("Qual o id da venda? ")
-    
+
     produto = produtos[vendas[id_venda][0]][0]
     cliente = clientes[vendas[id_venda][1]][0]
-    
+
     if id_venda in vendas.keys():
         print()
         print("Comprador: ", cliente)
@@ -273,7 +280,7 @@ def pesquisarProduto():
     print("############################################")
     print()
     id_produto = input("Qual o id do produto? ")
-    
+
     if id_produto in produtos.keys():
         print()
         print("Produto: ", produtos[id_produto][0])
@@ -307,6 +314,40 @@ def atualizarCliente():
     print("#####           Atualizar Cliente      #####")
     print("############################################")
     print()
+    id_cliente = input("Qual o id do cliente? ")
+
+    if id_cliente in clientes.keys():
+        print()
+        nome_cliente = input("##### Nome: ")
+        print()
+        telefone_cliente = input("##### Telefone: ")
+        print()
+        email_cliente = input("##### Email: ")
+        print()
+        endereço_cliente = input("##### Endereço: ")
+
+        clientes[id_cliente] = [
+            nome_cliente, telefone_cliente, email_cliente, endereço_cliente
+        ]
+
+        cliente = clientes[id_cliente][0]
+        telefone = clientes[id_cliente][1]
+        email = clientes[id_cliente][2]
+        endereco = clientes[id_cliente][3]
+        print()
+        print("Cliente cadastrado com sucesso!!")
+        print()
+        print(f"Nome: {cliente}")
+        print(f"Telefone: {telefone}")
+        print(f"Email: {email}")
+        print(f"Endereço: {endereco}")
+        print("Id de cadastro: ", id_cliente)
+        print()
+    else:
+        print(
+            "Não foi possível encontrar o cliente. Tem certeza que ele está cadastrado?"
+        )
+
     input("Tecle <ENTER> para continuar... ")
 
 
@@ -316,6 +357,60 @@ def atualizarVenda():
     print("#####           Atualizar Venda        #####")
     print("############################################")
     print()
+    id_venda = input("Qual o id da venda? ")
+    print()
+
+    if id_venda in vendas.keys():
+        id_produto = input("##### Produto vendido: ")
+        print()
+        id_cliente = input("##### Cliente: ")
+        print()
+        qtd_vendida = input("##### Quantidade vendida: ")
+        print()
+        forma_pagamento = input("##### Forma de pagamento: \n##### 1 - Cartão de Débito \n##### 2 - Cartão de Crédito \n##### 3 - Espécie \n##### 4 - PIX \n: ")
+
+        if forma_pagamento == "1":
+            forma_pagamento = "Cartão Débito"
+        elif forma_pagamento == "2":
+            forma_pagamento = "Cartão Crédito"
+        elif forma_pagamento == "3":
+            forma_pagamento = "Espécie"
+        elif forma_pagamento == "4":
+            forma_pagamento = "PIX"
+        else:
+            print("Forma de pagamento inválida. Retornaremos ao Menu Cadastrar")
+            input("Tecle <ENTER> para voltar ao menu... ")
+
+        data = datetime.now()
+
+        if id_produto in produtos.keys():
+            if id_cliente in clientes.keys():
+                vendas[id_venda] = [
+                    id_produto,
+                    id_cliente,
+                    qtd_vendida,
+                    forma_pagamento,
+                    data.strftime("%x, %X"),
+                ]
+
+                cliente = clientes[vendas[id_venda][1]][0]
+                produto = produtos[vendas[id_venda][0]][0]
+                print()
+                print("Venda cadastrado com sucesso!!")
+                print()
+                print(f"Nome do cliente: {cliente}")
+                print(f"Produto: {produto}")
+                print(f"Quantidade: {qtd_vendida}")
+                print(f"Forma de pagamento: {forma_pagamento}")
+                print("Data: ", data.strftime("%x às %X"))
+                print("Id de cadastro: ", id_venda)
+                print()
+            else:
+                print("Cliente não encontrado. ")
+                print()
+        else: 
+            print("Produto não encontrado. ")
+            print()
     input("Tecle <ENTER> para continuar... ")
 
 
@@ -325,7 +420,30 @@ def atualizarProduto():
     print("#####           Atualizar Produto      #####")
     print("############################################")
     print()
-    input("Tecle <ENTER> para continuar... ")
+    id_produto = input("Qual o id do produto? ")
+    print()
+
+    if id_produto in produtos.keys():
+
+        nome_produto = input("Nome: ")
+        print()
+        qtd_produto = input("Quantidade: ")
+        print()
+        preco_produto = input("Preço: ")
+
+        produtos[id_produto] = [nome_produto, qtd_produto, preco_produto]
+
+        produto = produtos[id_produto][0]
+        quantidade = produtos[id_produto][1]
+        preco = produtos[id_produto][2]
+
+        print()
+        print(f"Nome do produto: {produto}")
+        print(f"Quantidade: {quantidade}")
+        print(f"Preço da unidade: R$ {preco}")
+        print("Id de cadastro: ", id_produto)
+        print()
+        input("Tecle <ENTER> para continuar... ")
 
 
 ##########################
@@ -468,5 +586,6 @@ def informacoes():
     input("Tecle <ENTER> para continuar... ")
     # op_minfo = input("Tecle <ENTER> para continuar... ")
     # return op_minfo
+
 
 escreverArquivos()
