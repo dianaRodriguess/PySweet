@@ -3,12 +3,12 @@ import pickle
 """
 clientes - nome, telefone, email, endereço
 produtos - nome, quantidade, preço
-vendas - cliente, produto, qtdvendida, data, fdp
+vendas -  id_produto, id_cliente, qtdvendida, form.pagamento, data
 """
 
 clientes = {"1": ["Cliente Teste", "00000", "teste@teste.com", "Rua Teste"]}
 produtos = {"1": ["Produto Teste", "9999", "0.50"]}
-vendas = {"1": ["1", "1", "999", "00/00/0000", "PIX"]}
+vendas = {"1": ["1", "1", "999", "PIX", "01/01/01, 00:00:00"]}
 
 # escrever o dicionário no arquivo
 try:

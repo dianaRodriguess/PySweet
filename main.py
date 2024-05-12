@@ -1,5 +1,3 @@
-import os
-import dicionarios
 from funcoes import (
     atualizarCliente,
     atualizarProduto,
@@ -22,11 +20,11 @@ from funcoes import (
     pesquisarCliente,
     pesquisarProduto,
     pesquisarVenda,
-    prdtMaisEstoque,
+    exibirClientes,
+    exibirProdutos,
+    exibirVendas,
     prdtMaisVend,
-    prdtMenosEstoque,
-    prdtMenosVend,
-    # carregarArquivos,
+    maioresCompradores,
     escreverArquivos
 )
 
@@ -35,10 +33,6 @@ from funcoes import (
 ######################################
 
 # MENU PRINCIPAL
-
-# função para ler os dados do arquivo e coloca no dicio 
-# carregarArquivos()
-
 op_mprinc = ""
 while op_mprinc != "0":
     op_mprinc = menuPrincipal()
@@ -103,13 +97,13 @@ while op_mprinc != "0":
             print()
 
             if op_mrela == "1":
-                prdtMaisVend()
+                exibirClientes()
             elif op_mrela == "2":
-                prdtMenosVend()
+                exibirVendas()
             elif op_mrela == "3":
-                prdtMaisEstoque()
+                exibirProdutos()
             elif op_mrela == "4":
-                prdtMenosEstoque()
+                prdtMaisVend()
             elif op_mrela == "5":
                 maioresCompradores()
             elif op_mrela == "6":
