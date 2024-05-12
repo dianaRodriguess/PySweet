@@ -69,14 +69,14 @@ def cadastrarCliente():
     print()
     endereço_cliente = input("##### Endereço: ")
 
-    id = clientes.__len__() + 1
-    id = str(id)
-    clientes[id] = [nome_cliente, telefone_cliente, email_cliente, endereço_cliente]
+    id_cliente = clientes.__len__() + 1
+    id_cliente = str(id_cliente)
+    clientes[id_cliente] = [nome_cliente, telefone_cliente, email_cliente, endereço_cliente]
 
-    cliente = clientes[id][0]
-    telefone = clientes[id][1]
-    email = clientes[id][2]
-    endereco = clientes[id][3]
+    cliente = clientes[id_cliente][0]
+    telefone = clientes[id_cliente][1]
+    email = clientes[id_cliente][2]
+    endereco = clientes[id_cliente][3]
     print()
     print("Cliente cadastrado com sucesso!!")
     print()
@@ -84,7 +84,7 @@ def cadastrarCliente():
     print(f"Telefone: {telefone}")
     print(f"Email: {email}")
     print(f"Endereço: {endereco}")
-    print("Id de cadastro: ", id)
+    print("Id de cadastro: ", id_cliente)
     print()
 
     input("Tecle <ENTER> para continuar... ")
@@ -126,9 +126,9 @@ def cadastrarVenda():
     if id_produto in produtos.keys():
         if id_cliente in clientes.keys():
 
-            id = vendas.__len__() + 1
-            id = str(id)
-            vendas[id] = [
+            id_venda = vendas.__len__() + 1
+            id_venda = str(id_produto)
+            vendas[id_venda] = [
                 id_produto,
                 id_cliente,
                 qtd_vendida,
@@ -136,8 +136,8 @@ def cadastrarVenda():
                 data.strftime("%x, %X"),
             ]
 
-            cliente = clientes[vendas[id][1]][0]
-            produto = produtos[vendas[id][0]][0]
+            cliente = clientes[vendas[id_venda][1]][0]
+            produto = produtos[vendas[id_venda][0]][0]
             print()
             print("Venda cadastrado com sucesso!!")
             print()
@@ -146,7 +146,7 @@ def cadastrarVenda():
             print(f"Quantidade: {qtd_vendida}")
             print(f"Forma de pagamento: {forma_pagamento}")
             print("Data: ", data.strftime("%x às %X"))
-            print("Id de cadastro: ", id)
+            print("Id de cadastro: ", id_venda)
             print()
     else:
         print("Produto não encotrado. ")
@@ -166,20 +166,20 @@ def cadastrarProduto():
     print()
     preco_produto = input("Preço: ")
 
-    id = produtos.__len__() + 1
-    id = str(id)
-    produtos[id] = [nome_produto, qtd_produto, preco_produto]
+    id_produto = produtos.__len__() + 1
+    id_produto = str(id_produto)
+    produtos[id_produto] = [nome_produto, qtd_produto, preco_produto]
 
-    produto = produtos[id][0]
-    quantidade = produtos[id][1]
-    preco = produtos[id][2]
+    produto = produtos[id_produto][0]
+    quantidade = produtos[id_produto][1]
+    preco = produtos[id_produto][2]
 
     print("\nProduto cadastrado com sucesso!!")
     print()
     print(f"Nome do produto: {produto}")
     print(f"Quantidade: {quantidade}")
     print(f"Preço da unidade: R$ {preco}")
-    print("Id de cadastro: ", id)
+    print("Id de cadastro: ", id_produto)
     print()
     input("Tecle <ENTER> para continuar... ")
 
@@ -241,8 +241,8 @@ def pesquisarVenda():
         print("Comprador: ", cliente)
         print("Produto vendido: ", produto)
         print("Quantidade vendida: ", vendas[id_venda][2])
-        print("Data: ", vendas[id_venda][3])
-        print("Forma de pagamento: ", vendas[id_venda][4])
+        print("Forma de pagamento: ", vendas[id_venda][3])
+        print("Data: ", vendas[id_venda][4])
         print()
     input("Tecle <ENTER> para continuar... ")
 
@@ -253,6 +253,7 @@ def pesquisarProduto():
     print("#####           Pesquisar Produto      #####")
     print("############################################")
     print()
+    print(produtos)
     id_produto = input("Qual o id do produto? ")
 
     if id_produto in produtos.keys():
@@ -344,6 +345,8 @@ def atualizarVenda():
         print()
         qtd_vendida = input("##### Quantidade vendida: ")
         print()
+        data = input("##### Data (data, hora): ")
+        print()
         forma_pagamento = input(
             "##### Forma de pagamento: \n##### 1 - Cartão de Débito \n##### 2 - Cartão de Crédito \n##### 3 - Espécie \n##### 4 - PIX \n: "
         )
@@ -360,7 +363,7 @@ def atualizarVenda():
             print("Forma de pagamento inválida. Retornaremos ao Menu Cadastrar")
             input("Tecle <ENTER> para voltar ao menu... ")
 
-        data = datetime.now()
+        # data = datetime.now()
 
         if id_produto in produtos.keys():
             if id_cliente in clientes.keys():
@@ -369,7 +372,7 @@ def atualizarVenda():
                     id_cliente,
                     qtd_vendida,
                     forma_pagamento,
-                    data.strftime("%x, %X"),
+                    data,
                 ]
 
                 cliente = clientes[vendas[id_venda][1]][0]
@@ -381,7 +384,7 @@ def atualizarVenda():
                 print(f"Produto: {produto}")
                 print(f"Quantidade: {qtd_vendida}")
                 print(f"Forma de pagamento: {forma_pagamento}")
-                print("Data: ", data.strftime("%x às %X"))
+                print(f"Data: {data}")
                 print("Id de cadastro: ", id_venda)
                 print()
             else:
@@ -488,8 +491,8 @@ def deletarVenda():
         print("Comprador: ", cliente)
         print("Produto vendido: ", produto)
         print("Quantidade vendida: ", vendas[id_venda][2])
-        print("Data: ", vendas[id_venda][3])
-        print("Forma de pagamento: ", vendas[id_venda][4])
+        print("Forma de pagamento: ", vendas[id_venda][3])
+        print("Data: ", vendas[id_venda][4])
         
         resp = input("Tem certeza que deseja excluir esta venda (S/N)? ").lower()
         
@@ -541,8 +544,8 @@ def menuRelatorio():
     print("#####   Você está no Módulo Relatório   ####")
     print("############################################")
     print("#####   1 - Exibir todos os clientes   #####")
-    print("#####   2 - Exibir todos os produtos   #####")
-    print("#####   3 - Exibir todas as vendas     #####")
+    print("#####   2 - Exibir todos os vendas     #####")
+    print("#####   3 - Exibir todas as produtos   #####")
     print("#####   4 - Produtos com mais vendem   #####")
     print("#####   5 - Maiores compradores        #####")
     print("#####   6 - Datas que mais vendem      #####")
@@ -551,7 +554,70 @@ def menuRelatorio():
     op_mrela = input("##### Escolha sua opção: ")
     return op_mrela
 
+def exibirClientes():
+    os.system("clear")
+    print()
+    print("#########################################################################################################################")
+    print("#################################                Exibir todos os clientes               #################################")
+    print("#########################################################################################################################")
+    print("|-----------|-----------------------------|--------------------|----------------------------|---------------------------|")
+    print("|     Id    |        Nome Completo        |      Telefone      |            Email           |          Endereço         |")
+    print("|-----------|-----------------------------|--------------------|----------------------------|---------------------------|")
+    for id in clientes:
+        print("| %-9s "%(id), end='')
+        print("| %-27s "%(clientes[id][0]), end='')
+        print("| %-18s "%(clientes[id][1]), end='')
+        print("| %-26s "%(clientes[id][2]), end='')
+        print("| %-25s |"%(clientes[id][3]))
+        
+    print("|-----------|-----------------------------|--------------------|----------------------------|---------------------------|")
+    print()
+    input("Tecle <ENTER> para continuar... ")
 
+def exibirVendas():
+    os.system("clear")
+    
+    print()
+    print("#######################################################################################################")
+    print("##############################           Exibir todas as vendas           #############################")
+    print("#######################################################################################################")
+    print("|------|----------------------------|-----------------------|---------------|------------------|--------------------|")
+    print("|  Id  |          Comprador         |         Produto       |  Qtd.vendida  |  Form.Pagamento  |        Data        |")
+    print("|------|----------------------------|-----------------------|---------------|------------------|--------------------|")
+    for id in vendas:
+        cliente = clientes[vendas[id][1]][0]
+        produto = produtos[vendas[id][0]][0]
+        print("| %-4s "%(id), end='')
+        print("| %-26s "%(cliente), end='')
+        print("| %-21s "%(produto), end='')
+        print("| %-13s "%(vendas[id][2]), end='')
+        print("| %-16s "%(vendas[id][3]), end='')
+        print("| %-15s |"%(vendas[id][4]))
+        
+    print("|------|----------------------------|-----------------------|---------------|------------------|--------------------|")
+
+    print()
+    input("Tecle <ENTER> para continuar... ")
+
+
+def exibirProdutos():
+    os.system("clear")
+    print()
+    print("##################################################################################")
+    print("#######################      Exibir todos os produtos      #######################")
+    print("##################################################################################")
+    print("|-----------|-----------------------------|--------------------|-----------------|")
+    print("|     Id    |           Produto           |     Quantidade     |    Preço (R$)   |")
+    print("|-----------|-----------------------------|--------------------|-----------------|")
+    for id in produtos:
+        print("| %-9s "%(id), end='')
+        print("| %-27s "%(produtos[id][0]), end='')
+        print("| %-18s "%(produtos[id][1]), end='')
+        print("| %-15s |"%(produtos[id][2]))
+    print("|-----------|-----------------------------|--------------------|-----------------|")
+    print()
+    input("Tecle <ENTER> para continuar... ")
+    
 def prdtMaisVend():
     os.system("clear")
     print("#################################################")
@@ -559,34 +625,6 @@ def prdtMaisVend():
     print("#################################################")
     print()
     input("Tecle <ENTER> para continuar... ")
-
-
-def prdtMenosVend():
-    os.system("clear")
-    print("#################################################")
-    print("#####        Produtos Menos Vendidos        #####")
-    print("#################################################")
-    print()
-    input("Tecle <ENTER> para continuar... ")
-
-
-def prdtMaisEstoque():
-    os.system("clear")
-    print("#################################################")
-    print("#####      Produtos Com Maior Estoque       #####")
-    print("#################################################")
-    print()
-    input("Tecle <ENTER> para continuar... ")
-
-
-def prdtMenosEstoque():
-    os.system("clear")
-    print("#################################################")
-    print("#####      Produtos Com Menor Estoque       #####")
-    print("#################################################")
-    print()
-    input("Tecle <ENTER> para continuar... ")
-
 
 def maioresCompradores():
     os.system("clear")
