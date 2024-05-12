@@ -1,18 +1,7 @@
 import pickle
 import os
-import time
 from datetime import datetime
 from dicionarios import clientes, produtos, vendas
-
-# def carregarArquivos():
-#     try:
-#         arq_clientes = open("clientes.dat", "rb")
-#         clientes = pickle.load(arq_clientes)
-#     except:
-#         arq_clientes = open("clientes.dat", "wb")
-#     arq_clientes.close()
-
-# carregarArquivos()
 
 
 def escreverArquivos():
@@ -82,9 +71,7 @@ def cadastrarCliente():
 
     id = clientes.__len__() + 1
     id = str(id)
-    clientes[id] = [
-        nome_cliente, telefone_cliente, email_cliente, endereço_cliente
-    ]
+    clientes[id] = [nome_cliente, telefone_cliente, email_cliente, endereço_cliente]
 
     cliente = clientes[id][0]
     telefone = clientes[id][1]
@@ -132,8 +119,8 @@ def cadastrarVenda():
         forma_pagamento = "PIX"
     else:
         print("Forma de pagamento inválida. Retornaremos ao Menu Cadastrar")
-        # time.sleep(3)
-        # menuCadastrar()
+        input("Tecle <ENTER> para voltar ao menu... ")
+
     data = datetime.now()
 
     if id_produto in produtos.keys():
@@ -215,7 +202,6 @@ def menuPesquisar():
     return op_mpesq
 
 
-# TODO: deixar mais bonito
 def pesquisarCliente():
     os.system("clear")
     print("############################################")
@@ -223,18 +209,6 @@ def pesquisarCliente():
     print("############################################")
     print()
     id_cliente = input("Qual o id do cliente? ")
-
-    # # read
-    # aqvjson = open("clientes.json", "r")
-    # jsondata = aqvjson.read()
-
-    # # parse
-    # obj = json.loads(jsondata)
-    # lista = obj[id_cliente]
-    # cliente = lista[0]
-    # telefone = lista[1]
-    # email = lista[2]
-    # endereço = lista[3]
 
     if id_cliente in clientes.keys():
         print()
@@ -327,7 +301,10 @@ def atualizarCliente():
         endereço_cliente = input("##### Endereço: ")
 
         clientes[id_cliente] = [
-            nome_cliente, telefone_cliente, email_cliente, endereço_cliente
+            nome_cliente,
+            telefone_cliente,
+            email_cliente,
+            endereço_cliente,
         ]
 
         cliente = clientes[id_cliente][0]
@@ -367,7 +344,9 @@ def atualizarVenda():
         print()
         qtd_vendida = input("##### Quantidade vendida: ")
         print()
-        forma_pagamento = input("##### Forma de pagamento: \n##### 1 - Cartão de Débito \n##### 2 - Cartão de Crédito \n##### 3 - Espécie \n##### 4 - PIX \n: ")
+        forma_pagamento = input(
+            "##### Forma de pagamento: \n##### 1 - Cartão de Débito \n##### 2 - Cartão de Crédito \n##### 3 - Espécie \n##### 4 - PIX \n: "
+        )
 
         if forma_pagamento == "1":
             forma_pagamento = "Cartão Débito"
@@ -408,7 +387,7 @@ def atualizarVenda():
             else:
                 print("Cliente não encontrado. ")
                 print()
-        else: 
+        else:
             print("Produto não encontrado. ")
             print()
     input("Tecle <ENTER> para continuar... ")
@@ -470,6 +449,26 @@ def deletarCliente():
     print("#####           Deletar Cliente        #####")
     print("############################################")
     print()
+    id_cliente = input("Qual o id do cliente? ")
+    print()
+    
+    if id_cliente in clientes.keys():
+        print("Nome: ", clientes[id_cliente][0])
+        print("Telefone: ", clientes[id_cliente][1])
+        print("Email: ", clientes[id_cliente][2])
+        print("Endereço: ", clientes[id_cliente][3])
+        
+        resp = input("\nTem certeza que deseja deletar este cliente (S/N)? ").lower()
+        
+        if resp == "s":
+            del clientes[id_cliente]
+            print("Cliente excluido com sucesso! ")
+        else: 
+            print("Não foi possível excluir o cliente. ")
+    else:
+        print("Cliente não encontrado. ")
+    
+    print()    
     input("Tecle <ENTER> para continuar... ")
 
 
@@ -478,6 +477,30 @@ def deletarVenda():
     print("############################################")
     print("#####           Deletar Venda        #####")
     print("############################################")
+    print()
+    id_venda = input("Qual o id da venda? ")
+    
+    produto = produtos[vendas[id_venda][0]][0]
+    cliente = clientes[vendas[id_venda][1]][0]
+
+    if id_venda in vendas.keys():
+        print()
+        print("Comprador: ", cliente)
+        print("Produto vendido: ", produto)
+        print("Quantidade vendida: ", vendas[id_venda][2])
+        print("Data: ", vendas[id_venda][3])
+        print("Forma de pagamento: ", vendas[id_venda][4])
+        
+        resp = input("Tem certeza que deseja excluir esta venda (S/N)? ").lower()
+        
+        if resp == 's':
+            del vendas[id_venda]
+            print("Venda excluida com sucesso! ")
+        else:
+            print("Não foi possível excluir a venda. ")
+    else:
+        print("Venda não encontrada. ")
+        
     print()
     input("Tecle <ENTER> para continuar... ")
 
@@ -488,6 +511,23 @@ def deletarProduto():
     print("#####           Deletar Produto        #####")
     print("############################################")
     print()
+    id_produto = input("Qual o id do produto? ")
+    
+    if id_produto in produtos.keys():
+        print("Nome: ", produtos[id_produto][0])
+        print("Quantidade: ", produtos[id_produto][1])
+        print("Preço: ", produtos[id_produto][2])
+        
+        resp = input("Tem certeza que deseja excluir este produto (S/N)? ").lower()
+        
+        if resp == 's':
+            del produtos[id_produto]
+            print("Produto excluido com sucesso! ")
+        else: 
+            print("Não foi possível excluir o produto. ")
+    else:
+        print("Produto não encotrado. ")
+    print()    
     input("Tecle <ENTER> para continuar... ")
 
 
@@ -500,10 +540,10 @@ def menuRelatorio():
     print("############################################")
     print("#####   Você está no Módulo Relatório   ####")
     print("############################################")
-    print("#####   1 - Produtos mais vendidos     #####")
-    print("#####   2 - Produtos menos vendidos    #####")
-    print("#####   3 - Produtos com maior estoque #####")
-    print("#####   4 - Produtos com menor estoque #####")
+    print("#####   1 - Exibir todos os clientes   #####")
+    print("#####   2 - Exibir todos os produtos   #####")
+    print("#####   3 - Exibir todas as vendas     #####")
+    print("#####   4 - Produtos com mais vendem   #####")
     print("#####   5 - Maiores compradores        #####")
     print("#####   6 - Datas que mais vendem      #####")
     print("#####   0 - Sair                       #####")
