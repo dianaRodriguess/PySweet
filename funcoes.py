@@ -90,8 +90,8 @@ def cadastrarCliente():
     input("Tecle <ENTER> para continuar... ")
 
 
-# def calcularPreco():
-
+# TODO: def calcularPreco():
+# TODO: remover qtd_vendida do estoque
 
 def cadastrarVenda():
     os.system("clear")
@@ -603,21 +603,21 @@ def exibirVendas():
     print("#######################################################################################################")
     print("##############################           Exibir todas as vendas           #############################")
     print("#######################################################################################################")
-    print("|------|----------------------------|-----------------------|---------------|------------------|------------|--------------------|")
-    print("|  Id  |          Comprador         |         Produto       |  Qtd.vendida  |  Form.Pagamento  |    Valor   |        Data        |")
-    print("|------|----------------------------|-----------------------|---------------|------------------|------------|--------------------|")
+    print("|------|----------------------------|-------------------------|---------------|------------------|------------|--------------------|")
+    print("|  Id  |          Comprador         |         Produto         |  Qtd.vendida  |  Form.Pagamento  |    Valor   |        Data        |")
+    print("|------|----------------------------|-------------------------|---------------|------------------|------------|--------------------|")
     for venda in vendas:
         cliente = clientes[vendas[venda][1]][0]
         produto = produtos[vendas[venda][0]][0]
         print("| %-4s "%(venda), end='')
         print("| %-26s "%(cliente), end='')
-        print("| %-21s "%(produto), end='')
+        print("| %-23s "%(produto), end='')
         print("| %-13s "%(vendas[venda][2]), end='')
         print("| %-16s "%(vendas[venda][3]), end='')
         print("| %-10s "%(vendas[venda][4]), end='')
         print("| %-16s |"%(vendas[venda][5]))
         
-    print("|------|----------------------------|-----------------------|---------------|------------------|------------|--------------------|")
+    print("|------|----------------------------|-------------------------|---------------|------------------|------------|--------------------|")
 
     print()
     input("Tecle <ENTER> para continuar... ")
@@ -647,22 +647,25 @@ def prdtMaisVend():
     print("#####         Produtos Mais Vendidos        #####")
     print("#################################################")
     print()
-    print("PRODUTOS    |    QUANTIDADE")
-    for venda in vendas:
-        id_produto = vendas[venda][0]
-        qtd_vendida = vendas[venda][2]
-        produtos_vendidos = {
-            id_produto: qtd_vendida
-        }
-        lista_produtos = list(produtos_vendidos.keys())
-        lista_quantidade = list(produtos_vendidos.values())
-        lista_produtos = sorted(lista_produtos)
-        lista_quantidade = sorted(lista_quantidade)
-
-        for p in lista_produtos:
-            for q in lista_quantidade:
-                print("%-11s |"%p, end='')
-                print(" %10s"%q)
+    print("|-----------------------------|--------------------|")
+    print("|           Produto           |     Quantidade     |")
+    print("|-----------------------------|--------------------|")
+    produtos_vendidos = {}
+    for venda in vendas.values():
+        id_produto = venda[0]
+        qtd_vendida = int(venda[2])
+        if id_produto in produtos_vendidos:
+            produtos_vendidos[id_produto] += qtd_vendida
+        else:
+            produtos_vendidos[id_produto] = qtd_vendida
+    lista_quantidade = list(produtos_vendidos.values())
+    lista_quantidade.sort(reverse=True)
+    for i in range(5):
+        for p in produtos_vendidos:
+            if produtos_vendidos[p] == lista_quantidade[i]:
+                print("| %-27s "%produtos[p][0], end='')
+                print("| %-18s |"%produtos_vendidos[p])
+    print("|-----------------------------|--------------------|")
     print()   
     input("Tecle <ENTER> para continuar... ")
 
@@ -672,16 +675,17 @@ def maioresCompradores():
     print("#####         Maiores Compradores           #####")
     print("#################################################")
     print()
+    # ir em vendas e ver os clientes que mais aparecem e printar eles
     input("Tecle <ENTER> para continuar... ")
 
 
-def dtMaisVendem():
-    os.system("clear")
-    print("#################################################")
-    print("#####         Datas Que Mais Vendem         #####")
-    print("#################################################")
-    print()
-    input("Tecle <ENTER> para continuar... ")
+# def dtMaisVendem():
+#     os.system("clear")
+#     print("#################################################")
+#     print("#####         Datas Que Mais Vendem         #####")
+#     print("#################################################")
+#     print()
+#     input("Tecle <ENTER> para continuar... ")
 
 
 ##############################
@@ -702,8 +706,6 @@ def informacoes():
     print("##### www.gnu.org/licenses/gpl.html               ####")
     print()
     input("Tecle <ENTER> para continuar... ")
-    # op_minfo = input("Tecle <ENTER> para continuar... ")
-    # return op_minfo
 
 
 escreverArquivos()
