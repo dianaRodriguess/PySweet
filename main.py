@@ -5,7 +5,7 @@ from funcoes import (
     deletarCliente,
     deletarProduto,
     deletarVenda,
-    dtMaisVendem,
+    # dtMaisVendem,
     informacoes,
     maioresCompradores,
     menuPrincipal,
@@ -106,8 +106,8 @@ while op_mprinc != "0":
                 prdtMaisVend()
             elif op_mrela == "5":
                 maioresCompradores()
-            elif op_mrela == "6":
-                dtMaisVendem()
+            # elif op_mrela == "6":
+            #     dtMaisVendem()
     # MÓDULO INFORMAÇÕES
     elif op_mprinc == "6":
         informacoes()
