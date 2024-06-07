@@ -5,7 +5,6 @@ from funcoes import (
     deletarCliente,
     deletarProduto,
     deletarVenda,
-    # dtMaisVendem,
     informacoes,
     maioresCompradores,
     menuPrincipal,
@@ -24,7 +23,6 @@ from funcoes import (
     exibirProdutos,
     exibirVendas,
     prdtMaisVend,
-    maioresCompradores,
     escreverArquivos
 )
 
