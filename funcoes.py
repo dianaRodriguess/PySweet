@@ -91,8 +91,7 @@ def cadastrarCliente():
 
 
 # TODO: def calcularPreco():
-# TODO: remover qtd_vendida do estoque
-
+# TODO: remover quantidade comprada do estoque
 def cadastrarVenda():
     os.system("clear")
     print("############################################")
@@ -590,8 +589,7 @@ def exibirClientes():
         print("| %-27s "%(clientes[cliente][0]), end='')
         print("| %-18s "%(clientes[cliente][1]), end='')
         print("| %-26s "%(clientes[cliente][2]), end='')
-        print("| %-25s |"%(clientes[cliente][3]))
-        
+        print("| %-25s |"%(clientes[cliente][3])) 
     print("|-----------|-----------------------------|--------------------|----------------------------|---------------------------|")
     print()
     input("Tecle <ENTER> para continuar... ")
@@ -618,7 +616,6 @@ def exibirVendas():
         print("| %-16s |"%(vendas[venda][5]))
         
     print("|------|----------------------------|-------------------------|---------------|------------------|------------|--------------------|")
-
     print()
     input("Tecle <ENTER> para continuar... ")
 
@@ -675,7 +672,26 @@ def maioresCompradores():
     print("#####         Maiores Compradores           #####")
     print("#################################################")
     print()
-    # ir em vendas e ver os clientes que mais aparecem e printar eles
+    print("|-----------------------------|--------------------|")
+    print("|           Cliente           |     Quantidade     |")
+    print("|-----------------------------|--------------------|")
+    maiores_compradores = {}
+    for venda in vendas.values():
+        id_cliente = venda[1]
+        qtd_vendida = int(venda[2])
+        if id_cliente in maiores_compradores:
+            maiores_compradores[id_cliente] += qtd_vendida
+        else:
+            maiores_compradores[id_cliente] = qtd_vendida
+    lista_quantidade = list(maiores_compradores.values())
+    lista_quantidade.sort(reverse=True)
+    for i in range(5):
+        for c in maiores_compradores:
+            if maiores_compradores[c] == lista_quantidade[i]:
+                print("| %-27s "%clientes[c][0], end='')
+                print("| %-18s |"%maiores_compradores[c])
+    print("|-----------------------------|--------------------|")
+    print()   
     input("Tecle <ENTER> para continuar... ")
 
 
