@@ -1,5 +1,5 @@
 import pickle
-import os
+import interfaces as ifc
 from datetime import datetime
 from dicionarios import clientes, produtos, vendas
 
@@ -22,45 +22,20 @@ def escreverArquivos():
 ##### MENU PRICIPAL #####
 #########################
 def menuPrincipal():
-    os.system("clear")
-    print("############################################")
-    print("######         Projeto PySweet        ######")
-    print("############################################")
-    print("#####      1 - Módulo Cadastrar        #####")
-    print("#####      2 - Módulo Pesquisar        #####")
-    print("#####      3 - Módulo Atualizar        #####")
-    print("#####      4 - Módulo Deletar          #####")
-    print("#####      5 - Módulo Relatório        #####")
-    print("#####      6 - Módulo Informações      #####")
-    print("#####      0 - Sair                    #####")
+    ifc.interfaceMenuPrincipal()
     op_mprinc = input("##### Escolha sua opção: ")
     return op_mprinc
-
 
 ############################
 ##### MÓDULO CADASTRAR #####
 ############################
 def menuCadastrar():
-    os.system("clear")
-    print()
-    print("############################################")
-    print("#####         Módulo Cadastrar          ####")
-    print("############################################")
-    print("#####   1 - Cadastrar Cliente          #####")
-    print("#####   2 - Cadastrar Venda            #####")
-    print("#####   3 - Cadastrar Produto          #####")
-    print("#####   0 - Sair                       #####")
-    print()
+    ifc.interfaceMenuCadastrar()
     op_mcadas = input("##### Escolha sua opção: ")
     return op_mcadas
 
-
 def cadastrarCliente():
-    os.system("clear")
-    print("############################################")
-    print("#####           Cadastrar Cliente      #####")
-    print("############################################")
-    print()
+    ifc.cabecalhoModulos("Cadastrar Cliente")
     nome_cliente = input("##### Nome: ")
     print()
     telefone_cliente = input("##### Telefone: ")
@@ -85,19 +60,12 @@ def cadastrarCliente():
     print(f"Email: {email}")
     print(f"Endereço: {endereco}")
     print("Id de cadastro: ", id_cliente)
+    
     print()
-
     input("Tecle <ENTER> para continuar... ")
 
-
-# TODO: def calcularPreco():
-# TODO: remover quantidade comprada do estoque
 def cadastrarVenda():
-    os.system("clear")
-    print("############################################")
-    print("#####           Cadastrar Venda        #####")
-    print("############################################")
-    print()
+    ifc.cabecalhoModulos("Cadastrar Venda")
     id_produto = input("##### Produto vendido: ")
     print()
     id_cliente = input("##### Cliente: ")
@@ -105,9 +73,7 @@ def cadastrarVenda():
     qtd_vendida = input("##### Quantidade vendida: ")
     print()
     valor_total = input("##### Total: ")
-    forma_pagamento = input(
-        "##### Forma de pagamento: \n##### 1 - Cartão de Débito \n##### 2 - Cartão de Crédito \n##### 3 - Espécie \n##### 4 - PIX \n: "
-    )
+    forma_pagamento = input("##### Forma de pagamento: \n##### 1 - Cartão de Débito \n##### 2 - Cartão de Crédito \n##### 3 - Espécie \n##### 4 - PIX \n: " )
 
     if forma_pagamento == "1":
         forma_pagamento = "Cartão Débito"
@@ -128,14 +94,7 @@ def cadastrarVenda():
 
             id_venda = vendas.__len__() + 1
             id_venda = str(id_venda)
-            vendas[id_venda] = [
-                id_produto,
-                id_cliente,
-                qtd_vendida,
-                forma_pagamento,
-                valor_total,
-                data.strftime("%x, %X"),
-            ]
+            vendas[id_venda] = [id_produto,id_cliente,qtd_vendida,forma_pagamento,valor_total,data.strftime("%x, %X"),]
 
             cliente = clientes[vendas[id_venda][1]][0]
             produto = produtos[vendas[id_venda][0]][0]
@@ -149,26 +108,20 @@ def cadastrarVenda():
             print(f"Total: {valor_total}")
             print("Data: ", data.strftime("%x às %X"))
             print("Id de cadastro: ", id_venda)
-            print()
         else:
             print("Cliente não encontrado. ")
     else:
         print("Produto não encotrado. ")
-
+    print()
     input("Tecle <ENTER> para continuar... ")
 
-
 def cadastrarProduto():
-    os.system("clear")
-    print("############################################")
-    print("#####           Cadastrar Produto      #####")
-    print("############################################")
+    ifc.cabecalhoModulos("Cadastrar Produto")
+    nome_produto = input("##### Nome: ")
     print()
-    nome_produto = input("Nome: ")
+    qtd_produto = input("##### Quantidade: ")
     print()
-    qtd_produto = input("Quantidade: ")
-    print()
-    preco_produto = input("Preço: ")
+    preco_produto = input("##### Preço: ")
 
     id_produto = produtos.__len__() + 1
     id_produto = str(id_produto)
@@ -187,31 +140,16 @@ def cadastrarProduto():
     print()
     input("Tecle <ENTER> para continuar... ")
 
-
 ############################
 ##### MÓDULO PESQUISAR #####
 ############################
 def menuPesquisar():
-    os.system("clear")
-    print()
-    print("############################################")
-    print("#####          Módulo Pesquisar         ####")
-    print("############################################")
-    print("#####   1 - Pesquisar Cliente          #####")
-    print("#####   2 - Pesquisar Venda            #####")
-    print("#####   3 - Pesquisar Produto          #####")
-    print("#####   0 - Sair                       #####")
-    print()
+    ifc.interfaceMenuPesquisar()
     op_mpesq = input("##### Escolha sua opção: ")
     return op_mpesq
 
-
 def pesquisarCliente():
-    os.system("clear")
-    print("############################################")
-    print("#####          Pesquisar Cliente       #####")
-    print("############################################")
-    print()
+    ifc.cabecalhoModulos("Pesquisar Cliente")
     id_cliente = input("Qual o id do cliente? ")
 
     if id_cliente in clientes.keys():
@@ -222,19 +160,12 @@ def pesquisarCliente():
         print("Endereço: ", clientes[id_cliente][3])
         print()
     else:
-        print(
-            "Não foi possível encontrar o cliente. Tem certeza que ele está cadastrado? " )
+        print("Não foi possível encontrar o cliente. Tem certeza que ele está cadastrado? " )
     print()
     input("Tecle <ENTER> para continuar... ")
 
-
 def pesquisarVenda():
-    os.system("clear")
-    print("############################################")
-    print("#####           Pesquisar Venda        #####")
-    print("############################################")
-    print()
-    print(vendas)
+    ifc.cabecalhoModulos("Pesquisar Venda")
     id_venda = input("Qual o id da venda? ")
 
     produto = produtos[vendas[id_venda][0]][0]
@@ -254,14 +185,8 @@ def pesquisarVenda():
     print()
     input("Tecle <ENTER> para continuar... ")
 
-
 def pesquisarProduto():
-    os.system("clear")
-    print("############################################")
-    print("#####           Pesquisar Produto      #####")
-    print("############################################")
-    print()
-    print(produtos)
+    ifc.cabecalhoModulos("Pesquisar Produto")
     id_produto = input("Qual o id do produto? ")
 
     if id_produto in produtos.keys():
@@ -269,37 +194,21 @@ def pesquisarProduto():
         print("Produto: ", produtos[id_produto][0])
         print("Quantidade: ", produtos[id_produto][1])
         print("Preço: ", produtos[id_produto][2])
-        print()
     else:
         print("Não foi possível achar o produto. Tem certeza que ele está cadastrado? ")
-    print("")
+    print()
     input("Tecle <ENTER> para continuar... ")
-
 
 ############################
 ##### MÓDULO ATUALIZAR #####
 ############################
 def menuAtualizar():
-    os.system("clear")
-    print()
-    print("############################################")
-    print("#####         Módulo Atualizar          ####")
-    print("############################################")
-    print("#####   1 - Atualizar Cliente          #####")
-    print("#####   2 - Atualizar Venda            #####")
-    print("#####   3 - Atualizar Produto          #####")
-    print("#####   0 - Sair                       #####")
-    print()
+    ifc.interfaceMenuAtualizar()
     op_matua = input("##### Escolha sua opção: ")
     return op_matua
 
-
 def atualizarCliente():
-    os.system("clear")
-    print("############################################")
-    print("#####           Atualizar Cliente      #####")
-    print("############################################")
-    print()
+    ifc.cabecalhoModulos("Atualizar Cliente")
     id_cliente = input("Qual o id do cliente? ")
 
     if id_cliente in clientes.keys():
@@ -312,12 +221,7 @@ def atualizarCliente():
         print()
         endereço_cliente = input("##### Endereço: ")
 
-        clientes[id_cliente] = [
-            nome_cliente,
-            telefone_cliente,
-            email_cliente,
-            endereço_cliente,
-        ]
+        clientes[id_cliente] = [nome_cliente,telefone_cliente,email_cliente,endereço_cliente,]
 
         cliente = clientes[id_cliente][0]
         telefone = clientes[id_cliente][1]
@@ -331,20 +235,13 @@ def atualizarCliente():
         print(f"Email: {email}")
         print(f"Endereço: {endereco}")
         print("Id de cadastro: ", id_cliente)
-        print()
     else:
-        print(
-            "Não foi possível encontrar o cliente. Tem certeza que ele está cadastrado?")
+        print("Não foi possível encontrar o cliente. Tem certeza que ele está cadastrado?")
     print()
     input("Tecle <ENTER> para continuar... ")
 
-
 def atualizarVenda():
-    os.system("clear")
-    print("############################################")
-    print("#####           Atualizar Venda        #####")
-    print("############################################")
-    print()
+    ifc.cabecalhoModulos("Atualizar Venda")
     id_venda = input("Qual o id da venda? ")
     print()
 
@@ -358,9 +255,7 @@ def atualizarVenda():
         data = input("##### Data (data, hora): ")
         print()
         valor_total = input("##### valor_total: ")
-        forma_pagamento = input(
-            "##### Forma de pagamento: \n##### 1 - Cartão de Débito \n##### 2 - Cartão de Crédito \n##### 3 - Espécie \n##### 4 - PIX \n: "
-        )
+        forma_pagamento = input("##### Forma de pagamento: \n##### 1 - Cartão de Débito \n##### 2 - Cartão de Crédito \n##### 3 - Espécie \n##### 4 - PIX \n: ")
 
         if forma_pagamento == "1":
             forma_pagamento = "Cartão Débito"
@@ -374,18 +269,9 @@ def atualizarVenda():
             print("Forma de pagamento inválida. Retornaremos ao Menu Cadastrar")
             input("Tecle <ENTER> para voltar ao menu... ")
 
-        # data = datetime.now()
-
         if id_produto in produtos.keys():
             if id_cliente in clientes.keys():
-                vendas[id_venda] = [
-                    id_produto,
-                    id_cliente,
-                    qtd_vendida,
-                    forma_pagamento,
-                    valor_total,
-                    data,
-                ]
+                vendas[id_venda] = [id_produto,id_cliente, qtd_vendida,forma_pagamento,valor_total,data]
 
                 cliente = clientes[vendas[id_venda][1]][0]
                 produto = produtos[vendas[id_venda][0]][0]
@@ -399,26 +285,17 @@ def atualizarVenda():
                 print(f"Total: {valor_total}")
                 print(f"Data: {data}")
                 print("Id de cadastro: ", id_venda)
-                print()
             else:
                 print("Cliente não encontrado. ")
-                print()
         else:
             print("Produto não encontrado. ")
-            print()
     else:
-        print(
-            "Não foi possível encontrar a venda. Tem certeza que ela está cadastrada?")
+        print("Não foi possível encontrar a venda. Tem certeza que ela está cadastrada?")
     print()
     input("Tecle <ENTER> para continuar... ")
 
-
 def atualizarProduto():
-    os.system("clear")
-    print("############################################")
-    print("#####           Atualizar Produto      #####")
-    print("############################################")
-    print()
+    ifc.cabecalhoModulos("Atualizar Produto")
     id_produto = input("Qual o id do produto? ")
     print()
 
@@ -443,36 +320,20 @@ def atualizarProduto():
         print("Id de cadastro: ", id_produto)
         print()
     else:
-        print(
-            "Não foi possível encontrar o cliente. Tem certeza que ele está cadastrado?")
+        print("Não foi possível encontrar o cliente. Tem certeza que ele está cadastrado?")
     print()
     input("Tecle <ENTER> para continuar... ")
-
 
 ##########################
 ##### MÓDULO DELETAR #####
 ##########################
 def menuDeletar():
-    os.system("clear")
-    print()
-    print("############################################")
-    print("#####           Módulo Deletar          ####")
-    print("############################################")
-    print("#####   1 - Deletar Cliente            #####")
-    print("#####   2 - Deletar Venda              #####")
-    print("#####   3 - Deletar Produto            #####")
-    print("#####   0 - Sair                       #####")
-    print()
+    ifc.interfaceMenuDeletar()
     op_mdele = input("##### Escolha sua opção: ")
     return op_mdele
 
-
 def deletarCliente():
-    os.system("clear")
-    print("############################################")
-    print("#####           Deletar Cliente        #####")
-    print("############################################")
-    print()
+    ifc.cabecalhoModulos("Deletar Cliente")
     id_cliente = input("Qual o id do cliente? ")
     print()
     
@@ -495,13 +356,8 @@ def deletarCliente():
     print()    
     input("Tecle <ENTER> para continuar... ")
 
-
 def deletarVenda():
-    os.system("clear")
-    print("############################################")
-    print("#####           Deletar Venda        #####")
-    print("############################################")
-    print()
+    ifc.cabecalhoModulos("Deletar Venda")
     id_venda = input("Qual o id da venda? ")
     
     produto = produtos[vendas[id_venda][0]][0]
@@ -523,18 +379,12 @@ def deletarVenda():
         else:
             print("Não foi possível excluir a venda. ")
     else:
-        print("Venda não encontrada. Tem certeza que ela está cadastrada?")
-        
+        print("Venda não encontrada. Tem certeza que ela está cadastrada?")      
     print()
     input("Tecle <ENTER> para continuar... ")
 
-
 def deletarProduto():
-    os.system("clear")
-    print("############################################")
-    print("#####           Deletar Produto        #####")
-    print("############################################")
-    print()
+    ifc.cabecalhoModulos("Deletar Produto")
     id_produto = input("Qual o id do produto? ")
     
     if id_produto in produtos.keys():
@@ -554,56 +404,28 @@ def deletarProduto():
     print()    
     input("Tecle <ENTER> para continuar... ")
 
-
 ############################
 ##### MÓDULO RELATÓRIO #####
 ############################
 def menuRelatorio():
-    os.system("clear")
-    print()
-    print("############################################")
-    print("#####   Você está no Módulo Relatório   ####")
-    print("############################################")
-    print("#####   1 - Exibir todos os clientes   #####")
-    print("#####   2 - Exibir todos os vendas     #####")
-    print("#####   3 - Exibir todas as produtos   #####")
-    print("#####   4 - Produtos com mais vendem   #####")
-    print("#####   5 - Maiores compradores        #####")
-    print("#####   6 - Datas que mais vendem      #####")
-    print("#####   0 - Sair                       #####")
-    print()
+    ifc.interfaceMenuRelatorio()
     op_mrela = input("##### Escolha sua opção: ")
     return op_mrela
 
 def exibirClientes():
-    os.system("clear")
-    print()
-    print("#########################################################################################################################")
-    print("#################################                Exibir todos os clientes               #################################")
-    print("#########################################################################################################################")
-    print("|-----------|-----------------------------|--------------------|----------------------------|---------------------------|")
-    print("|     Id    |        Nome Completo        |      Telefone      |            Email           |          Endereço         |")
-    print("|-----------|-----------------------------|--------------------|----------------------------|---------------------------|")
+    ifc.interfaceExibirClientes()
     for cliente in clientes:
-        print("| %-9s "%(cliente), end='')
+        print("| %-4s "%(cliente), end='')
         print("| %-27s "%(clientes[cliente][0]), end='')
         print("| %-18s "%(clientes[cliente][1]), end='')
         print("| %-26s "%(clientes[cliente][2]), end='')
         print("| %-25s |"%(clientes[cliente][3])) 
-    print("|-----------|-----------------------------|--------------------|----------------------------|---------------------------|")
+    print("|------|-----------------------------|--------------------|----------------------------|---------------------------|")
     print()
     input("Tecle <ENTER> para continuar... ")
 
 def exibirVendas():
-    os.system("clear")
-    
-    print()
-    print("#######################################################################################################")
-    print("##############################           Exibir todas as vendas           #############################")
-    print("#######################################################################################################")
-    print("|------|----------------------------|-------------------------|---------------|------------------|------------|--------------------|")
-    print("|  Id  |          Comprador         |         Produto         |  Qtd.vendida  |  Form.Pagamento  |    Valor   |        Data        |")
-    print("|------|----------------------------|-------------------------|---------------|------------------|------------|--------------------|")
+    ifc.interfaceExibirVendas()
     for venda in vendas:
         cliente = clientes[vendas[venda][1]][0]
         produto = produtos[vendas[venda][0]][0]
@@ -619,34 +441,19 @@ def exibirVendas():
     print()
     input("Tecle <ENTER> para continuar... ")
 
-
 def exibirProdutos():
-    os.system("clear")
-    print()
-    print("##################################################################################")
-    print("#######################      Exibir todos os produtos      #######################")
-    print("##################################################################################")
-    print("|-----------|-----------------------------|--------------------|-----------------|")
-    print("|     Id    |           Produto           |     Quantidade     |    Preço (R$)   |")
-    print("|-----------|-----------------------------|--------------------|-----------------|")
+    ifc.interfaceExibirProdutos()
     for produto in produtos:
-        print("| %-9s "%(produto), end='')
+        print("| %-4s "%(produto), end='')
         print("| %-27s "%(produtos[produto][0]), end='')
         print("| %-18s "%(produtos[produto][1]), end='')
         print("| %-15s |"%(produtos[produto][2]))
-    print("|-----------|-----------------------------|--------------------|-----------------|")
+    print("|------|-----------------------------|--------------------|-----------------|")
     print()
     input("Tecle <ENTER> para continuar... ")
     
 def prdtMaisVend():
-    os.system("clear")
-    print("#################################################")
-    print("#####         Produtos Mais Vendidos        #####")
-    print("#################################################")
-    print()
-    print("|-----------------------------|--------------------|")
-    print("|           Produto           |     Quantidade     |")
-    print("|-----------------------------|--------------------|")
+    ifc.interfaceProdutosVendidos()
     produtos_vendidos = {}
     for venda in vendas.values():
         id_produto = venda[0]
@@ -667,14 +474,7 @@ def prdtMaisVend():
     input("Tecle <ENTER> para continuar... ")
 
 def maioresCompradores():
-    os.system("clear")
-    print("#################################################")
-    print("#####         Maiores Compradores           #####")
-    print("#################################################")
-    print()
-    print("|-----------------------------|--------------------|")
-    print("|           Cliente           |     Quantidade     |")
-    print("|-----------------------------|--------------------|")
+    ifc.interfaceMaioresCompradores()
     maiores_compradores = {}
     for venda in vendas.values():
         id_cliente = venda[1]
@@ -694,34 +494,11 @@ def maioresCompradores():
     print()   
     input("Tecle <ENTER> para continuar... ")
 
-
-# def dtMaisVendem():
-#     os.system("clear")
-#     print("#################################################")
-#     print("#####         Datas Que Mais Vendem         #####")
-#     print("#################################################")
-#     print()
-#     input("Tecle <ENTER> para continuar... ")
-
-
 ##############################
 ##### MÓDULO INFORMAÇÕES #####
 ##############################
 def informacoes():
-    os.system("clear")
-    print()
-    print("######################################################")
-    print("#####       Você está no Módulo Informações      #####")
-    print("######################################################")
-    print()
-    print("##### Projeto de Gestão de uma Fábrica de doces   ####")
-    print("##### Equipe de desenvolvimento:                  ####")
-    print("##### Diana Rodrigues @dianarodrigues3            ####")
-    print("##### Flavius Gorgônio @flgorgonio                ####")
-    print("##### Licença Pública Geral GNU                   ####")
-    print("##### www.gnu.org/licenses/gpl.html               ####")
-    print()
+    ifc.interfaceInformacoes()
     input("Tecle <ENTER> para continuar... ")
-
 
 escreverArquivos()
