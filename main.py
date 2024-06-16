@@ -1,27 +1,8 @@
 from cliente import cadastrarCliente, pesquisarCliente, atualizarCliente, deletarCliente
-from funcoes import (
-    atualizarProduto,
-    atualizarVenda,
-    deletarProduto,
-    deletarVenda,
-    informacoes,
-    maioresCompradores,
-    menuPrincipal,
-    menuCadastrar,
-    menuAtualizar,
-    menuPesquisar,
-    menuDeletar,
-    menuRelatorio,
-    cadastrarVenda,
-    cadastrarProduto,
-    pesquisarProduto,
-    pesquisarVenda,
-    exibirClientes,
-    exibirProdutos,
-    exibirVendas,
-    prdtMaisVend,
-    escreverArquivos
-)
+from venda import cadastrarVenda, pesquisarVenda, atualizarVenda, deletarVenda
+from produto import cadastrarProduto, pesquisarProduto, atualizarProduto, deletarProduto
+from relatorios import exibirClientes, exibirVendas, exibirProdutos, prdtMaisVend, maioresCompradores
+from funcoes import (informacoes,menuPrincipal,menuCadastrar,menuAtualizar,menuPesquisar,menuDeletar,menuRelatorio,escreverArquivos)
 
 ######################################
 #####      Projeto PySweet       #####
@@ -101,8 +82,6 @@ while op_mprinc != "0":
                 prdtMaisVend()
             elif op_mrela == "5":
                 maioresCompradores()
-            # elif op_mrela == "6":
-            #     dtMaisVendem()
     # MÓDULO INFORMAÇÕES
     elif op_mprinc == "6":
         informacoes()
