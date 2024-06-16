@@ -1,8 +1,8 @@
 import pickle
 import interfaces as ifc
 from datetime import datetime
-from dicionarios import clientes, produtos, vendas
-
+from dicionarios import clientes, produtos, vendas, formas_pagamento
+from validacoes.validacoes import validarFormaPagamento
 
 def escreverArquivos():
     arq_clientes = open("clientes.dat", "wb")
@@ -34,36 +34,6 @@ def menuCadastrar():
     op_mcadas = input("##### Escolha sua opção: ")
     return op_mcadas
 
-def cadastrarCliente():
-    ifc.cabecalhoModulos("Cadastrar Cliente")
-    nome_cliente = input("##### Nome: ")
-    print()
-    telefone_cliente = input("##### Telefone: ")
-    print()
-    email_cliente = input("##### Email: ")
-    print()
-    endereço_cliente = input("##### Endereço: ")
-
-    id_cliente = clientes.__len__() + 1
-    id_cliente = str(id_cliente)
-    clientes[id_cliente] = [nome_cliente, telefone_cliente, email_cliente, endereço_cliente]
-
-    cliente = clientes[id_cliente][0]
-    telefone = clientes[id_cliente][1]
-    email = clientes[id_cliente][2]
-    endereco = clientes[id_cliente][3]
-    print()
-    print("Cliente cadastrado com sucesso!!")
-    print()
-    print(f"Nome: {cliente}")
-    print(f"Telefone: {telefone}")
-    print(f"Email: {email}")
-    print(f"Endereço: {endereco}")
-    print("Id de cadastro: ", id_cliente)
-    
-    print()
-    input("Tecle <ENTER> para continuar... ")
-
 def cadastrarVenda():
     ifc.cabecalhoModulos("Cadastrar Venda")
     id_produto = input("##### Produto vendido: ")
@@ -73,19 +43,12 @@ def cadastrarVenda():
     qtd_vendida = input("##### Quantidade vendida: ")
     print()
     valor_total = input("##### Total: ")
-    forma_pagamento = input("##### Forma de pagamento: \n##### 1 - Cartão de Débito \n##### 2 - Cartão de Crédito \n##### 3 - Espécie \n##### 4 - PIX \n: " )
-
-    if forma_pagamento == "1":
-        forma_pagamento = "Cartão Débito"
-    elif forma_pagamento == "2":
-        forma_pagamento = "Cartão Crédito"
-    elif forma_pagamento == "3":
-        forma_pagamento = "Espécie"
-    elif forma_pagamento == "4":
-        forma_pagamento = "PIX"
-    else:
-        print("Forma de pagamento inválida. Retornaremos ao Menu Cadastrar")
-        input("Tecle <ENTER> para voltar ao menu... ")
+    # guardar como int
+    forma_pagamento = input("##### Forma de pagamento: \n##### 1 - Cartão de Débito \n##### 2 - Cartão de Crédito \n##### 3 - Espécie \n##### 4 - PIX \n: ")
+    
+    while not validarFormaPagamento(formas_pagamento, int(forma_pagamento)):
+        print("Forma de pagamento invalida. Por favor escola novamente. ")
+        forma_pagamento = input("##### Forma de pagamento: \n##### 1 - Cartão de Débito \n##### 2 - Cartão de Crédito \n##### 3 - Espécie \n##### 4 - PIX \n: " )
 
     data = datetime.now()
 
@@ -148,22 +111,6 @@ def menuPesquisar():
     op_mpesq = input("##### Escolha sua opção: ")
     return op_mpesq
 
-def pesquisarCliente():
-    ifc.cabecalhoModulos("Pesquisar Cliente")
-    id_cliente = input("Qual o id do cliente? ")
-
-    if id_cliente in clientes.keys():
-        print()
-        print("Nome: ", clientes[id_cliente][0])
-        print("Telefone: ", clientes[id_cliente][1])
-        print("Email: ", clientes[id_cliente][2])
-        print("Endereço: ", clientes[id_cliente][3])
-        print()
-    else:
-        print("Não foi possível encontrar o cliente. Tem certeza que ele está cadastrado? " )
-    print()
-    input("Tecle <ENTER> para continuar... ")
-
 def pesquisarVenda():
     ifc.cabecalhoModulos("Pesquisar Venda")
     id_venda = input("Qual o id da venda? ")
@@ -206,39 +153,6 @@ def menuAtualizar():
     ifc.interfaceMenuAtualizar()
     op_matua = input("##### Escolha sua opção: ")
     return op_matua
-
-def atualizarCliente():
-    ifc.cabecalhoModulos("Atualizar Cliente")
-    id_cliente = input("Qual o id do cliente? ")
-
-    if id_cliente in clientes.keys():
-        print()
-        nome_cliente = input("##### Nome: ")
-        print()
-        telefone_cliente = input("##### Telefone: ")
-        print()
-        email_cliente = input("##### Email: ")
-        print()
-        endereço_cliente = input("##### Endereço: ")
-
-        clientes[id_cliente] = [nome_cliente,telefone_cliente,email_cliente,endereço_cliente,]
-
-        cliente = clientes[id_cliente][0]
-        telefone = clientes[id_cliente][1]
-        email = clientes[id_cliente][2]
-        endereco = clientes[id_cliente][3]
-        print()
-        print("Cliente cadastrado com sucesso!!")
-        print()
-        print(f"Nome: {cliente}")
-        print(f"Telefone: {telefone}")
-        print(f"Email: {email}")
-        print(f"Endereço: {endereco}")
-        print("Id de cadastro: ", id_cliente)
-    else:
-        print("Não foi possível encontrar o cliente. Tem certeza que ele está cadastrado?")
-    print()
-    input("Tecle <ENTER> para continuar... ")
 
 def atualizarVenda():
     ifc.cabecalhoModulos("Atualizar Venda")
@@ -332,30 +246,6 @@ def menuDeletar():
     op_mdele = input("##### Escolha sua opção: ")
     return op_mdele
 
-def deletarCliente():
-    ifc.cabecalhoModulos("Deletar Cliente")
-    id_cliente = input("Qual o id do cliente? ")
-    print()
-    
-    if id_cliente in clientes.keys():
-        print("Nome: ", clientes[id_cliente][0])
-        print("Telefone: ", clientes[id_cliente][1])
-        print("Email: ", clientes[id_cliente][2])
-        print("Endereço: ", clientes[id_cliente][3])
-        
-        resp = input("\nTem certeza que deseja deletar este cliente (S/N)? ").lower()
-        
-        if resp == "s":
-            del clientes[id_cliente]
-            print("Cliente excluido com sucesso! ")
-        else: 
-            print("Não foi possível excluir o cliente. ")
-    else:
-        print("Cliente não encontrado. Tem certeza que ele está cadastrado?")
-    
-    print()    
-    input("Tecle <ENTER> para continuar... ")
-
 def deletarVenda():
     ifc.cabecalhoModulos("Deletar Venda")
     id_venda = input("Qual o id da venda? ")
@@ -426,6 +316,7 @@ def exibirClientes():
 
 def exibirVendas():
     ifc.interfaceExibirVendas()
+    print(formas_pagamento[vendas["12"][3]])
     for venda in vendas:
         cliente = clientes[vendas[venda][1]][0]
         produto = produtos[vendas[venda][0]][0]
@@ -501,4 +392,3 @@ def informacoes():
     ifc.interfaceInformacoes()
     input("Tecle <ENTER> para continuar... ")
 
-escreverArquivos()
