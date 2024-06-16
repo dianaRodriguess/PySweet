@@ -7,8 +7,6 @@ def exibirCliente(id_cliente):
     email = clientes[id_cliente][2]
     endereco = clientes[id_cliente][3]
     print()
-    print("Cliente cadastrado com sucesso!!")
-    print()
     print(f"Nome: {cliente}")
     print(f"Telefone: {telefone}")
     print(f"Email: {email}")
@@ -30,6 +28,7 @@ def cadastrarCliente():
     clientes[id_cliente] = [nome_cliente, telefone_cliente, email_cliente, endereço_cliente]
 
     exibirCliente(id_cliente)
+    print("\nCliente cadastrado com sucesso!")
     print()
     input("Tecle <ENTER> para continuar... ")
 
@@ -61,8 +60,8 @@ def atualizarCliente():
         endereço_cliente = input("##### Endereço: ")
 
         clientes[id_cliente] = [nome_cliente,telefone_cliente,email_cliente,endereço_cliente]
-
         exibirCliente(id_cliente)
+        print("\nDados do Cliente adualizado com sucesso!")
     else:
         print("Não foi possível encontrar o cliente. Tem certeza que ele está cadastrado?")
     print()
@@ -88,8 +87,3 @@ def deletarCliente():
 
     print()    
     input("Tecle <ENTER> para continuar... ")
-
-
-
-
-
