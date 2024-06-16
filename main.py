@@ -1,8 +1,7 @@
+from cliente import cadastrarCliente, pesquisarCliente, atualizarCliente, deletarCliente
 from funcoes import (
-    atualizarCliente,
     atualizarProduto,
     atualizarVenda,
-    deletarCliente,
     deletarProduto,
     deletarVenda,
     informacoes,
@@ -13,10 +12,8 @@ from funcoes import (
     menuPesquisar,
     menuDeletar,
     menuRelatorio,
-    cadastrarCliente,
     cadastrarVenda,
     cadastrarProduto,
-    pesquisarCliente,
     pesquisarProduto,
     pesquisarVenda,
     exibirClientes,
