@@ -1,3 +1,4 @@
+import funcoes
 import interfaces as ifc
 from dicionarios import clientes
 
@@ -15,11 +16,11 @@ def exibirCliente(id_cliente):
     
 def cadastrarCliente():
     ifc.cabecalhoModulos("Cadastrar Cliente")
-    nome_cliente = input("##### Nome: ")
+    nome_cliente = funcoes.lerNomeRegex()
     print()
-    telefone_cliente = input("##### Telefone: ")
+    telefone_cliente = funcoes.lerTelefone()
     print()
-    email_cliente = input("##### Email: ")
+    email_cliente = funcoes.lerEmail()
     print()
     endereço_cliente = input("##### Endereço: ")
 
@@ -51,11 +52,11 @@ def atualizarCliente():
 
     if id_cliente in clientes.keys():
         print()
-        nome_cliente = input("##### Nome: ")
+        nome_cliente = funcoes.lerNomeRegex()
         print()
-        telefone_cliente = input("##### Telefone: ")
+        telefone_cliente = funcoes.lerTelefone()
         print()
-        email_cliente = input("##### Email: ")
+        email_cliente = funcoes.lerEmail()
         print()
         endereço_cliente = input("##### Endereço: ")
 

@@ -1,5 +1,6 @@
 import interfaces as ifc
 from dicionarios import produtos
+import funcoes
 
 def exibirProduto(id_produto):
     produto = produtos[id_produto][0]
@@ -13,11 +14,11 @@ def exibirProduto(id_produto):
 
 def cadastrarProduto():
     ifc.cabecalhoModulos("Cadastrar Produto")
-    nome_produto = input("##### Nome: ")
+    nome_produto = funcoes.lerNome()
     print()
-    qtd_produto = input("##### Quantidade: ")
+    qtd_produto = funcoes.lerQuantidade()
     print()
-    preco_produto = input("##### Preço: ")
+    preco_produto = funcoes.lerPreco()
 
     id_produto = produtos.__len__() + 1
     id_produto = str(id_produto)
@@ -28,6 +29,7 @@ def cadastrarProduto():
     print("\nProduto cadastrado com sucesso!!")
     print()
     input("Tecle <ENTER> para continuar... ")
+    
 
 def pesquisarProduto():
     ifc.cabecalhoModulos("Pesquisar Produto")
@@ -48,11 +50,11 @@ def atualizarProduto():
 
     if id_produto in produtos.keys():
 
-        nome_produto = input("Nome: ")
+        nome_produto = funcoes.lerNome()
         print()
-        qtd_produto = input("Quantidade: ")
+        qtd_produto = funcoes.lerQuantidade()
         print()
-        preco_produto = input("Preço: ")
+        preco_produto = funcoes.lerPreco()
 
         produtos[id_produto] = [nome_produto, qtd_produto, preco_produto]
 

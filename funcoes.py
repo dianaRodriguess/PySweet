@@ -1,7 +1,9 @@
 import pickle
+from validacoes import validacoes
 import interfaces as ifc
 from dicionarios import clientes, produtos, vendas
 
+# escerver o dicionario no arquivo
 def escreverArquivos():
     arq_clientes = open("clientes.dat", "wb")
     pickle.dump(clientes, arq_clientes)
@@ -18,9 +20,55 @@ def escreverArquivos():
 #########################
 #####  FUNÇÕES LER  #####
 #########################
-# def lerNome():
-# def lerTelefone():
-# def lerEmail():
+def lerNome():
+    nome = input("##### Nome: ")
+    while not validacoes.validarNome(nome):
+        print("##### Ops! O nome informado é inválido! Tente novamente...")
+        print()
+        nome = input("##### Nome: ")
+    nome = validacoes.validarNome(nome)
+    return nome
+
+def lerNomeRegex():
+    nome = input("##### Nome: ")
+    while not validacoes.validarNomeRegex(nome):
+        print("##### Ops! O nome informado é inválido! Tente novamente...")
+        print()
+        nome = input("##### Nome: ")
+    return nome
+
+def lerTelefone():
+    tel = input("##### Telefone: ")
+    while not(validacoes.validarTelefone(tel)):
+        print("##### Ops! O celular informado é inválido! Tente novamente...")
+        print()
+        tel = input("##### Telefone: ")
+    return tel
+
+def lerEmail():
+    email = input("##### Email: ")
+    while not(validacoes.validarEmail(email)):
+        print("##### Ops! O Email informado é inválido! Tente novamente...")
+        print()
+        email = input("##### Email: ")
+    return email
+
+def lerQuantidade():
+    qtd = input("##### Quantidade: ")
+    while not validacoes.validarQuantidade(qtd):
+        print("##### Ops! Aceitamos somete números! Tente novamente...")
+        print()
+        qtd = input("##### Quantidade: ")
+    return qtd
+
+def lerPreco():
+    preco = input("##### Preço: ")
+    while not validacoes.validarPreco(preco):
+        print("##### Ops! Aceitamos somete números! Tente novamente...")
+        print()
+        preco = input("##### Preço: ")
+    return preco
+
 # def lerEndereço():
 
 #########################
