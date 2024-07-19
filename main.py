@@ -1,6 +1,6 @@
-import cliente
-import venda
-import produto
+from cruds import cliente
+from cruds import venda
+from cruds import produto
 import relatorios
 import funcoes
 
@@ -68,11 +68,11 @@ while op_mprinc != "0":
                 print()
                 match op_mrela:
                     case "1":
-                        relatorios.exibir_clientes()
+                        relatorios.ver_clientes()
                     case "2":
-                        relatorios.exibir_vendas()
+                        relatorios.ver_vendas()
                     case "3":
-                        relatorios.exibir_produtos()
+                        relatorios.ver_produtos()
                     case "4":
                         relatorios.prdt_mais_vend()
                     case "5":
