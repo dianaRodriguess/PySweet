@@ -1,9 +1,11 @@
 import os
+
 ##############################
 ##### INTERFACES DE MENU #####
 ##############################
 
-def interfaceMenuPrincipal():
+
+def interface_menu_principal():
     os.system("clear")
     print("############################################")
     print("######         Projeto PySweet        ######")
@@ -16,7 +18,8 @@ def interfaceMenuPrincipal():
     print("#####      6 - Módulo Informações      #####")
     print("#####      0 - Sair                    #####")
 
-def interfaceMenuCadastrar():
+
+def interface_menu_cadastrar():
     os.system("clear")
     print("############################################")
     print("#####         Módulo Cadastrar          ####")
@@ -26,8 +29,9 @@ def interfaceMenuCadastrar():
     print("#####   3 - Cadastrar Produto          #####")
     print("#####   0 - Sair                       #####")
     print()
-    
-def interfaceMenuPesquisar():
+
+
+def interface_menu_pesquisar():
     os.system("clear")
     print("############################################")
     print("#####          Módulo Pesquisar         ####")
@@ -38,7 +42,8 @@ def interfaceMenuPesquisar():
     print("#####   0 - Sair                       #####")
     print()
 
-def interfaceMenuAtualizar():
+
+def interface_menu_atualizar():
     os.system("clear")
     print("############################################")
     print("#####         Módulo Atualizar          ####")
@@ -48,8 +53,9 @@ def interfaceMenuAtualizar():
     print("#####   3 - Atualizar Produto          #####")
     print("#####   0 - Sair                       #####")
     print()
-    
-def interfaceMenuDeletar():
+
+
+def interface_menu_deletar():
     os.system("clear")
     print("############################################")
     print("#####           Módulo Deletar          ####")
@@ -60,7 +66,8 @@ def interfaceMenuDeletar():
     print("#####   0 - Sair                       #####")
     print()
 
-def interfaceMenuRelatorio():
+
+def interface_menu_relatorio():
     os.system("clear")
     print("############################################")
     print("#####   Você está no Módulo Relatório   ####")
@@ -73,8 +80,9 @@ def interfaceMenuRelatorio():
     print("#####   6 - Datas que mais vendem      #####")
     print("#####   0 - Sair                       #####")
     print()
-    
-def interfaceInformacoes():
+
+
+def interface_informacoes():
     os.system("clear")
     print("######################################################")
     print("#####       Você está no Módulo Informações      #####")
@@ -87,11 +95,12 @@ def interfaceInformacoes():
     print("##### Licença Pública Geral GNU                   ####")
     print("##### www.gnu.org/licenses/gpl.html               ####")
     print()
-    
+
+
 ###################################
 ##### INTERFACES DE CABEÇALHO #####
 ###################################
-def cabecalhoModulos(titulo):
+def cabecalho_modulos(titulo):
     os.system("clear")
     titulo_len = len(titulo)
     total_length = titulo_len + 10
@@ -103,34 +112,74 @@ def cabecalhoModulos(titulo):
     print(linha)
     print()
 
-def interfaceExibirClientes():
+
+def interface_ver_clientes():
     os.system("clear")
-    print("####################################################################################################################")
-    print("#################################             Exibir todos os clientes            ##################################")
-    print("####################################################################################################################")
-    print("|------|-----------------------------|--------------------|----------------------------|---------------------------|")
-    print("|  Id  |        Nome Completo        |      Telefone      |            Email           |          Endereço         |")
-    print("|------|-----------------------------|--------------------|----------------------------|---------------------------|")
-    
-def interfaceExibirVendas():
+    print(
+        "####################################################################################################################"
+    )
+    print(
+        "#################################             Exibir todos os clientes            ##################################"
+    )
+    print(
+        "####################################################################################################################"
+    )
+    print(
+        "|------|-----------------------------|--------------------|----------------------------|---------------------------|"
+    )
+    print(
+        "|  Id  |        Nome Completo        |      Telefone      |            Email           |          Endereço         |"
+    )
+    print(
+        "|------|-----------------------------|--------------------|----------------------------|---------------------------|"
+    )
+
+
+def interface_ver_vendas():
     os.system("clear")
-    print("####################################################################################################################################")
-    print("#########################################             Exibir todas as vendas             ###########################################")
-    print("####################################################################################################################################")
-    print("|------|----------------------------|-------------------------|---------------|------------------|------------|--------------------|")
-    print("|  Id  |          Comprador         |         Produto         |  Qtd.vendida  |  Form.Pagamento  |    Valor   |        Data        |")
-    print("|------|----------------------------|-------------------------|---------------|------------------|------------|--------------------|")
-    
-def interfaceExibirProdutos():
+    print(
+        "####################################################################################################################################"
+    )
+    print(
+        "#########################################             Exibir todas as vendas             ###########################################"
+    )
+    print(
+        "####################################################################################################################################"
+    )
+    print(
+        "|------|----------------------------|-------------------------|---------------|------------------|------------|--------------------|"
+    )
+    print(
+        "|  Id  |          Comprador         |         Produto         |  Qtd.vendida  |  Form.Pagamento  |    Valor   |        Data        |"
+    )
+    print(
+        "|------|----------------------------|-------------------------|---------------|------------------|------------|--------------------|"
+    )
+
+
+def interface_ver_produtos():
     os.system("clear")
-    print("#############################################################################")
-    print("###################        Exibir todos os produtos        ##################")
-    print("#############################################################################")
-    print("|------|-----------------------------|--------------------|-----------------|")
-    print("|  Id  |           Produto           |     Quantidade     |    Preço (R$)   |")
-    print("|------|-----------------------------|--------------------|-----------------|")
-    
-def interfaceProdutosVendidos():
+    print(
+        "#############################################################################"
+    )
+    print(
+        "###################        Exibir todos os produtos        ##################"
+    )
+    print(
+        "#############################################################################"
+    )
+    print(
+        "|------|-----------------------------|--------------------|-----------------|"
+    )
+    print(
+        "|  Id  |           Produto           |     Quantidade     |    Preço (R$)   |"
+    )
+    print(
+        "|------|-----------------------------|--------------------|-----------------|"
+    )
+
+
+def interface_prdt_mais_vend():  # produtos mais vendidos
     os.system("clear")
     print("####################################################")
     print("##########      Produtos Mais Vendidos     #########")
@@ -138,8 +187,9 @@ def interfaceProdutosVendidos():
     print("|-----------------------------|--------------------|")
     print("|           Produto           |     Quantidade     |")
     print("|-----------------------------|--------------------|")
-    
-def interfaceMaioresCompradores():
+
+
+def interface_maiores_compradores():
     os.system("clear")
     print("####################################################")
     print("###########      Maiores Compradores      ##########")
