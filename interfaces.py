@@ -77,7 +77,6 @@ def interface_menu_relatorio():
     print("#####   3 - Exibir todas as produtos   #####")
     print("#####   4 - Produtos com mais vendem   #####")
     print("#####   5 - Maiores compradores        #####")
-    print("#####   6 - Datas que mais vendem      #####")
     print("#####   0 - Sair                       #####")
     print()
 
