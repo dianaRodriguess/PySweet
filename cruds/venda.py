@@ -1,8 +1,8 @@
-import produto as pdt
+from cruds import produto as pdt
 import interfaces as ifc
 from datetime import datetime
 from dicionarios import clientes, produtos, formas_pagamento, vendas
-from validacoes.validacoes import validarFormaPagamento
+from validacoes.validacoes import validar_forma_pag
 
 
 def exibir_venda(id_venda):
@@ -46,10 +46,12 @@ def cadastrar_venda():
             )
         )
 
-        while not validarFormaPagamento(formas_pagamento, forma_pagamento):
+        while not validar_forma_pag(formas_pagamento, forma_pagamento):
             print("Forma de pagamento invalida. Por favor escola novamente. ")
-            forma_pagamento = input(
-                "##### Forma de pagamento: \n##### 1 - Cartão de Débito \n##### 2 - Cartão de Crédito \n##### 3 - Espécie \n##### 4 - PIX \n: "
+            forma_pagamento = int(
+                input(
+                    "##### Forma de pagamento: \n##### 1 - Cartão de Débito \n##### 2 - Cartão de Crédito \n##### 3 - Espécie \n##### 4 - PIX \n: "
+                )
             )
 
         data = datetime.now()
@@ -77,10 +79,12 @@ def pesquisar_venda():
     ifc.cabecalho_modulos("Pesquisar Venda")
     id_venda = input("Qual o id da venda? ")
 
+    print(type(id_venda))
+    print(vendas)
+
     if id_venda in vendas.keys():
         print()
         exibir_venda(id_venda)
-        print()
     else:
         print("Não foi possível achar a venda. Tem certeza que ela está cadastrada? ")
     print()
@@ -108,7 +112,7 @@ def atualizar_venda():
             )
         )
 
-        while not validarFormaPagamento(formas_pagamento, forma_pagamento):
+        while not validar_forma_pag(formas_pagamento, forma_pagamento):
             print("Forma de pagamento invalida. Por favor escola novamente. ")
             forma_pagamento = input(
                 "##### Forma de pagamento: \n##### 1 - Cartão de Débito \n##### 2 - Cartão de Crédito \n##### 3 - Espécie \n##### 4 - PIX \n: "
