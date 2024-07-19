@@ -14,22 +14,22 @@ formas_pagamento = {1: "Cartão de Credito", 2: "Cartão de Débito", 3: "Especi
 
 # escrever o dicionário no arquivo
 try:
-    arq_clientes = open("clientes.dat", "rb")
+    arq_clientes = open("data/clientes.dat", "rb")
     clientes = pickle.load(arq_clientes)
 except:
-    arq_clientes = open("clientes.dat", "wb")
+    arq_clientes = open("data/clientes.dat", "wb")
 arq_clientes.close()
 
 try:
-    arq_produtos = open("produtos.dat", "rb")
+    arq_produtos = open("data/produtos.dat", "rb")
     produtos = pickle.load(arq_produtos)
 except:
-    arq_produtos = open("produtos.dat", "wb")
+    arq_produtos = open("data/produtos.dat", "wb")
 arq_produtos.close()
 
 try:
-    arq_vendas = open("vendas.dat", "rb")
+    arq_vendas = open("data/vendas.dat", "rb")
     vendas = pickle.load(arq_vendas)
 except:
-    arq_vendas = open("vendas.dat", "wb")
+    arq_vendas = open("data/vendas.dat", "wb")
 arq_vendas.close()

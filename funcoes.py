@@ -1,118 +1,134 @@
 import pickle
+import re
 from validacoes import validacoes
 import interfaces as ifc
 from dicionarios import clientes, produtos, vendas
 
+
 # escerver o dicionario no arquivo
-def escreverArquivos():
-    arq_clientes = open("clientes.dat", "wb")
+def escrever_arquivos():
+    arq_clientes = open("data/clientes.dat", "wb")
     pickle.dump(clientes, arq_clientes)
     arq_clientes.close()
 
-    arq_produtos = open("produtos.dat", "wb")
+    arq_produtos = open("data/produtos.dat", "wb")
     pickle.dump(produtos, arq_produtos)
     arq_produtos.close()
 
-    arq_vendas = open("vendas.dat", "wb")
+    arq_vendas = open("data/vendas.dat", "wb")
     pickle.dump(vendas, arq_vendas)
     arq_vendas.close()
+
 
 #########################
 #####  FUNÇÕES LER  #####
 #########################
-def lerNome():
+def ler_nome():
     nome = input("##### Nome: ")
-    while not validacoes.validarNome(nome):
+    while not validacoes.validar_nome(nome):
         print("##### Ops! O nome informado é inválido! Tente novamente...")
         print()
         nome = input("##### Nome: ")
-    nome = validacoes.validarNome(nome)
+    nome = nome.strip().title()
+    nome = re.sub(r"\s+", " ", nome)
     return nome
 
-def lerNomeRegex():
+
+def ler_nome_regex():
     nome = input("##### Nome: ")
-    while not validacoes.validarNomeRegex(nome):
+    while not validacoes.validar_nome_regex(nome):
         print("##### Ops! O nome informado é inválido! Tente novamente...")
         print()
         nome = input("##### Nome: ")
     return nome
 
-def lerTelefone():
+
+def ler_telefone():
     tel = input("##### Telefone: ")
-    while not(validacoes.validarTelefone(tel)):
+    while not (validacoes.validar_telefone(tel)):
         print("##### Ops! O celular informado é inválido! Tente novamente...")
         print()
         tel = input("##### Telefone: ")
     return tel
 
-def lerEmail():
+
+def ler_email():
     email = input("##### Email: ")
-    while not(validacoes.validarEmail(email)):
+    while not (validacoes.validar_email(email)):
         print("##### Ops! O Email informado é inválido! Tente novamente...")
         print()
         email = input("##### Email: ")
     return email
 
-def lerQuantidade():
+
+def ler_quantidade():
     qtd = input("##### Quantidade: ")
-    while not validacoes.validarQuantidade(qtd):
+    while not validacoes.validar_quantidade(qtd):
         print("##### Ops! Aceitamos somete números! Tente novamente...")
         print()
         qtd = input("##### Quantidade: ")
     return qtd
 
-def lerPreco():
+
+def ler_preco():
     preco = input("##### Preço: ")
-    while not validacoes.validarPreco(preco):
+    while not validacoes.validar_preco(preco):
         print("##### Ops! Aceitamos somete números! Tente novamente...")
         print()
         preco = input("##### Preço: ")
     return preco
 
+
 # def lerEndereço():
+
 
 #########################
 #####     MENUS     #####
 #########################
-def menuPrincipal():
-    ifc.interfaceMenuPrincipal()
+def menu_principal():
+    ifc.interface_menu_principal()
     op_mprinc = input("##### Escolha sua opção: ")
     return op_mprinc
 
+
 ##### MÓDULO CADASTRAR #####
-def menuCadastrar():
-    ifc.interfaceMenuCadastrar()
+def menu_cadastrar():
+    ifc.interface_menu_cadastrar()
     op_mcadas = input("##### Escolha sua opção: ")
     return op_mcadas
 
+
 ##### MÓDULO PESQUISAR #####
-def menuPesquisar():
-    ifc.interfaceMenuPesquisar()
+def menu_pesquisar():
+    ifc.interface_menu_pesquisar()
     op_mpesq = input("##### Escolha sua opção: ")
     return op_mpesq
 
+
 ##### MÓDULO ATUALIZAR #####
-def menuAtualizar():
-    ifc.interfaceMenuAtualizar()
+def menu_atualizar():
+    ifc.interface_menu_atualizar()
     op_matua = input("##### Escolha sua opção: ")
     return op_matua
 
+
 ##### MÓDULO DELETAR #####
-def menuDeletar():
-    ifc.interfaceMenuDeletar()
+def menu_deletar():
+    ifc.interface_menu_deletar()
     op_mdele = input("##### Escolha sua opção: ")
     return op_mdele
 
+
 ##### MÓDULO RELATÓRIO #####
-def menuRelatorio():
-    ifc.interfaceMenuRelatorio()
+def menu_relatorio():
+    ifc.interface_menu_relatorio()
     op_mrela = input("##### Escolha sua opção: ")
     return op_mrela
+
 
 ##############################
 #####     INFORMAÇÕES    #####
 ##############################
 def informacoes():
-    ifc.interfaceInformacoes()
+    ifc.interface_informacoes()
     input("Tecle <ENTER> para continuar... ")
-
