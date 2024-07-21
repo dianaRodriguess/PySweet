@@ -26,7 +26,7 @@ def ver_clientes():
         print('| %-22s |' % (cidade))
         print('|══════════|═════════════════════════════|═════════════════|════════════════════════════|═══════════════════════════════|════════════════════════|')
     print()
-    input('Tecle <ENTER> para continuar... ')
+    input('»› Tecle <ENTER> para continuar... ')
 
 
 def ver_vendas():
@@ -48,7 +48,7 @@ def ver_vendas():
         '|══════════|════════════════════════════|═════════════════════════|═══════════════|══════════════════|════════════|════════════════════|'
     )
     print()
-    input('Tecle <ENTER> para continuar... ')
+    input('»› Tecle <ENTER> para continuar... ')
 
 
 def ver_produtos():
@@ -58,33 +58,41 @@ def ver_produtos():
         print('| %-27s ' % (produtos[produto][0]), end='')
         print('| %-18s ' % (produtos[produto][1]), end='')
         print('| %-15s |' % (produtos[produto][2]))
-    print(
-        '|══════════|═════════════════════════════|════════════════════|═════════════════|'
-    )
+    print('|══════════|═════════════════════════════|════════════════════|═════════════════|')
     print()
-    input('Tecle <ENTER> para continuar... ')
+    input('»› Tecle <ENTER> para continuar... ')
 
 
 def prdt_mais_vend():
     ifc.interface_prdt_mais_vend()
     produtos_vendidos = {}
     for venda in vendas.values():
+        # print(venda)
         id_produto = venda[0]
         qtd_vendida = int(venda[2])
+        # print(id_produto, qtd_vendida)
         if id_produto in produtos_vendidos:
             produtos_vendidos[id_produto] += qtd_vendida
         else:
             produtos_vendidos[id_produto] = qtd_vendida
+        # print(produtos_vendidos)
     lista_quantidade = list(produtos_vendidos.values())
+    # print(lista_quantidade)
     lista_quantidade.sort(reverse=True)
-    for i in range(5):
-        for p in produtos_vendidos:
-            if produtos_vendidos[p] == lista_quantidade[i]:
-                print('| %-27s ' % produtos[p][0], end='')
-                print('| %-18s |' % produtos_vendidos[p])
-    print('|═════════════════════════════|════════════════════|')
+    try: 
+        for i in range(5):
+            for p in produtos_vendidos:
+                # IndexError: list index out of range -> a lista é menor do que o range
+                if produtos_vendidos[p] == lista_quantidade[i]:
+                    print('| %-27s ' % produtos[p][0], end='')
+                    print('| %-18s |' % produtos_vendidos[p])
+        print('|═════════════════════════════|════════════════════|')
+    except IndexError:
+        print('|═════════════════════════════|════════════════════|')
+        print('\n»› Ops! Não é possível mostrar os cinco produtos mais vendidos. \n»› Não há vendas o suficiente.')
+        
     print()
-    input('Tecle <ENTER> para continuar... ')
+    input('»› Tecle <ENTER> para continuar... ')
 
 
 def maiores_compradores():
@@ -99,11 +107,16 @@ def maiores_compradores():
             maiores_compradores[id_cliente] = qtd_vendida
     lista_quantidade = list(maiores_compradores.values())
     lista_quantidade.sort(reverse=True)
-    for i in range(5):
-        for c in maiores_compradores:
-            if maiores_compradores[c] == lista_quantidade[i]:
-                print('| %-27s ' % clientes[c][0], end='')
-                print('| %-18s |' % maiores_compradores[c])
-    print('|═════════════════════════════|════════════════════|')
+    try:
+        for i in range(5):
+            for c in maiores_compradores:
+                # IndexError: list index out of range -> a lista é menor do que o range
+                if maiores_compradores[c] == lista_quantidade[i]:
+                    print('| %-27s ' % clientes[c][0], end='')
+                    print('| %-18s |' % maiores_compradores[c])
+        print('|═════════════════════════════|════════════════════|')
+    except IndexError:
+        print('|═════════════════════════════|════════════════════|')
+        print('\n»› Ops! Não é possível mostrar os cinco maiores compradores. \n»› Não há vendas o suficiente.')
     print()
-    input('Tecle <ENTER> para continuar... ')
+    input('»› Tecle <ENTER> para continuar... ')
