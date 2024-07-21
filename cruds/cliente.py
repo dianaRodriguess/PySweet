@@ -13,7 +13,7 @@ def exibir_cliente(id_cliente):
     bairro = endereco["bairro"]
     num_casa = endereco["num_casa"]
     logradouro = f"R. {rua} {num_casa}, {bairro}"
-    print()
+    print('»› Informações do Cliente ‹«')
     print(f"»› Nome: {cliente}")
     print(f"»› Telefone: {telefone}")
     print(f"»› Email: {email}")
@@ -54,86 +54,72 @@ def cadastrar_cliente():
 
 def pesquisar_cliente():
     ifc.cabecalho_modulos("Pesquisar Cliente")
-    id_cliente = input("››››› Digite o ID de cadastro do cliente: ")
+    id_cliente = funcoes.ler_codigo('Digite o ID de cadastro do cliente: ', clientes)
     sair = "n"
     while sair == "n":
-        if id_cliente in clientes.keys():
-            exibir_cliente(id_cliente)
-        else:
-            print(
-                "\n»› Não foi possível encontrar o cliente. Tem certeza que ele está cadastrado? "
-            )
+        exibir_cliente(id_cliente)
 
         sair = input('\n»› Deseja sair do módulo "Pesquisar Cliente" (S/N)? ').lower()
         print()
         if sair == "n":
-            id_cliente = input("››››› Digite o ID de cadastro do cliente: ")
+            id_cliente = funcoes.ler_codigo('Digite o ID de cadastro do cliente: ', clientes)
     print()
     input("»› Tecle <ENTER> para continuar... ")
 
 
 def atualizar_cliente():
     ifc.cabecalho_modulos("Atualizar Cliente")
-    id_cliente = input("››››› Digite o ID de cadastro do cliente: ")
+    id_cliente = funcoes.ler_codigo('Digite o ID de cadastro do cliente: ', clientes)
     sair = "n"
     while sair == "n":
-        if id_cliente in clientes.keys():
-            nome_cliente = funcoes.ler_nome()
-            telefone_cliente = funcoes.ler_telefone()
-            email_cliente = funcoes.ler_email()
-            cidade_cliente = funcoes.ler_cidade()
-            bairro_cliente = funcoes.ler_logradouro("Nome do Bairro")
-            rua_cliente = funcoes.ler_logradouro("Nome da Rua")
-            num_casa_cliente = funcoes.ler_logradouro("Número da casa")
+        nome_cliente = funcoes.ler_nome()
+        telefone_cliente = funcoes.ler_telefone()
+        email_cliente = funcoes.ler_email()
+        cidade_cliente = funcoes.ler_cidade()
+        bairro_cliente = funcoes.ler_logradouro("Nome do Bairro")
+        rua_cliente = funcoes.ler_logradouro("Nome da Rua")
+        num_casa_cliente = funcoes.ler_logradouro("Número da casa")
 
-            clientes[id_cliente] = [
-                nome_cliente,
-                telefone_cliente,
-                email_cliente,
-                {
-                    "cidade": cidade_cliente,
-                    "bairro": bairro_cliente,
-                    "rua": rua_cliente,
-                    "num_casa": num_casa_cliente,
-                },
-            ]
-            print("»› Novos dados do cliente: ")
-            exibir_cliente(id_cliente)
-            print("»› Dados do cliente atualizado com sucesso!")
-        else:
-            print(
-                "\n»› Não foi possível encontrar o cliente. Tem certeza que ele está cadastrado?"
-            )
+        clientes[id_cliente] = [
+            nome_cliente,
+            telefone_cliente,
+            email_cliente,
+            {
+                "cidade": cidade_cliente,
+                "bairro": bairro_cliente,
+                "rua": rua_cliente,
+                "num_casa": num_casa_cliente,
+            },
+        ]
+        print("»› Novos dados do cliente: ")
+        exibir_cliente(id_cliente)
+        print("»› Dados do cliente atualizado com sucesso!")
 
-        sair = input('\n»› Deseja sair do módulo "Pesquisar Cliente" (S/N)? ').lower()
+        sair = input('\n»› Deseja sair do módulo "Atualizar Cliente" (S/N)? ').lower()
         print()
         if sair == "n":
-            id_cliente = input("››››› Digite o ID de cadastro do cliente: ")
+            id_cliente = funcoes.ler_codigo('Digite o ID de cadastro do cliente: ', clientes)
     print()
     input("»› Tecle <ENTER> para continuar... ")
 
 
 def deletar_cliente():
     ifc.cabecalho_modulos("Deletar Cliente")
-    id_cliente = input("››››› Digite o ID de cadastro do cliente: ")
+    id_cliente = funcoes.ler_codigo('Digite o ID de cadastro do cliente: ', clientes)
     sair = "n"
     while sair == "n":
-        if id_cliente in clientes.keys():
-            exibir_cliente(id_cliente)
+        exibir_cliente(id_cliente)
+        resp = input("»› Tem certeza que deseja remover este cliente (S/N)? ").lower()
 
-            resp = input("»› Tem certeza que deseja remover este cliente (S/N)? ").lower()
-
-            if resp != "n":
-                del clientes[id_cliente]
-                print("»› Cliente excluido com sucesso! ")
-            else:
-                print("»› Não foi possível excluir o cliente. ")
+        if resp != "n":
+            del clientes[id_cliente]
+            print("»› Cliente excluido com sucesso! ")
         else:
-            print("»› Cliente não encontrado. Tem certeza que ele está cadastrado?")
+            print("»› Não foi possível excluir o cliente. ")
 
-        sair = input('\n»› Deseja sair do módulo "Pesquisar Cliente" (S/N)? ').lower()
+        sair = input('\n»› Deseja sair do módulo "Deletar Cliente" (S/N)? ').lower()
         print()
         if sair == "n":
-            id_cliente = input("››››› Digite o ID de cadastro do cliente: ")
+            id_cliente = funcoes.ler_codigo('Digite o ID de cadastro do cliente: ', clientes)
     print()
     input("»› Tecle <ENTER> para continuar... ")
