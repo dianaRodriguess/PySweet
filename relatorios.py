@@ -9,16 +9,19 @@ def ver_clientes():
         telefone = clientes[cliente][1]
         tel = f'({telefone[0:2]}) {telefone[2:7]}-{telefone[7:]}'
         endereco = clientes[cliente][3]
-        cidade = endereco['cidade']
         rua = endereco['rua']
         bairro = endereco['bairro']
         num_casa = endereco['num_casa']
-        logradouro = f'R. {rua} {num_casa}, {bairro}'
-    
+        
+        cidade = funcoes.truncate_string(endereco['cidade'], 22)
+        logradouro = funcoes.truncate_string(f'R. {rua} {num_casa}, {bairro}', 27)
+        nome_cliente = funcoes.truncate_string(clientes[cliente][0], 26)
+        email_cliente = funcoes.truncate_string(clientes[cliente][2], 26)
+        
         print('| %-8s ' % (cliente), end='')
-        print('| %-27s ' % (clientes[cliente][0]), end='')
+        print('| %-27s ' % (nome_cliente), end='')
         print('| %-15s ' % (tel), end='')
-        print('| %-26s ' % (clientes[cliente][2]), end='')
+        print('| %-26s ' % (email_cliente), end='')
         print('| %-29s ' % (logradouro), end='')
         print('| %-22s |' % (cidade))
         print('|══════════|═════════════════════════════|═════════════════|════════════════════════════|═══════════════════════════════|════════════════════════|')
@@ -28,11 +31,9 @@ def ver_clientes():
 
 def ver_vendas():
     ifc.interface_ver_vendas()
-    # print(formas_pagamento[vendas['12'][3]])
-    # print(vendas)
     for venda in vendas:
-        cliente = clientes[vendas[venda][1]][0]
-        produto = produtos[vendas[venda][0]][0]
+        cliente = funcoes.truncate_string(clientes[vendas[venda][1]][0], 26)
+        produto = funcoes.truncate_string(produtos[vendas[venda][0]][0], 23)
         print('| %-8s ' % (venda), end='')
         print('| %-26s ' % (cliente), end='')
         print('| %-23s ' % (produto), end='')
@@ -51,8 +52,9 @@ def ver_vendas():
 def ver_produtos():
     ifc.interface_ver_produtos()
     for produto in produtos:
+        nome_produto = funcoes.truncate_string(produtos[produto][0], 26)
         print('| %-8s ' % (produto), end='')
-        print('| %-27s ' % (produtos[produto][0]), end='')
+        print('| %-27s ' % (nome_produto), end='')
         print('| %-18s ' % (produtos[produto][1]), end='')
         print('| %-15s |' % (produtos[produto][2]))
     print(
@@ -78,7 +80,8 @@ def prdt_mais_vend():
         for i in range(5):
             for p in produtos_vendidos:
                 if produtos_vendidos[p] == lista_quantidade[i]:
-                    print('| %-27s ' % produtos[p][0], end='')
+                    nome_produto = funcoes.truncate_string(produtos[p][0], 27)
+                    print('| %-27s ' % nome_produto, end='')
                     print('| %-18s |' % produtos_vendidos[p])
         print('|═════════════════════════════|════════════════════|')
     except IndexError:
@@ -107,7 +110,8 @@ def maiores_compradores():
         for i in range(5):
             for c in maiores_compradores:
                 if maiores_compradores[c] == lista_quantidade[i]:
-                    print('| %-27s ' % clientes[c][0], end='')
+                    nome_cliente = funcoes.truncate_string(clientes[c][0], 27)
+                    print('| %-27s ' % nome_cliente, end='')
                     print('| %-18s |' % maiores_compradores[c])
         print('|═════════════════════════════|════════════════════|')
     except IndexError:
