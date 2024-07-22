@@ -2,7 +2,7 @@ import funcoes
 import interfaces as ifc
 from datetime import datetime
 from cruds import produto as pdt
-from dicionarios import clientes, produtos, formas_pagamento, vendas
+from dicionarios import clientes, produtos, vendas, formas_pagamento
 
 
 def exibir_venda(id_venda):
@@ -13,7 +13,7 @@ def exibir_venda(id_venda):
     forma_pagamento = formas_pagamento[vendas[id_venda][3]]
     valor_total = vendas[id_venda][4]
     data = vendas[id_venda][5]
-    print('»› Informações da Venda ‹«')
+    print('‹♥› Informações da Venda ‹♥›')
     print(f"»› Nome do cliente: {cliente}")
     print(f"»› Produto: {produto}")
     print(f"»› Quantidade: {qtd_vendida}")
@@ -55,8 +55,10 @@ def cadastrar_venda():
         data.strftime("%x, %X"),
     ]
     exibir_venda(id_venda)
+    print('\033[92m')
     print("»› Venda cadastrada com sucesso!")
-    print()
+    print('\033[0m')
+    
     input("»› Tecle <ENTER> para continuar... ")
 
 
@@ -67,20 +69,19 @@ def pesquisar_venda():
     while sair == "n":
         exibir_venda(id_venda)
 
-        sair = input('\n»› Deseja sair do módulo "Pesquisar Venda" (S/N)? ').lower()
+        sair = input('»› Deseja sair do módulo "Pesquisar Venda" (S/N)? ').lower()
         print()
         if sair == "n":
             id_venda = funcoes.ler_codigo('Digite o ID de cadastro da venda: ', vendas)
-        print()
-        input("\n»› Tecle <ENTER> para continuar... ")
+
+    input("»› Tecle <ENTER> para continuar... ")
 
 
 def atualizar_venda():
     ifc.cabecalho_modulos("Atualizar Venda")
     id_venda = funcoes.ler_codigo('Digite o ID de cadastro da venda: ', vendas)
-    print()
-
-    if id_venda in vendas.keys():
+    sair = 'n'
+    while sair == 'n':
         id_produto = funcoes.ler_codigo("ID do produto: ", produtos)
         id_cliente = funcoes.ler_codigo("ID do cliente: ", clientes)
         qtd_vendida = funcoes.ler_quantidade()
@@ -102,10 +103,17 @@ def atualizar_venda():
             data,
         ]
 
+        print("‹♥› Novos dados da venda ‹♥›")
         exibir_venda(id_venda)
-    else:
-        print("\n»› Não foi possível encontrar a venda. Tem certeza que ela está cadastrada?")
-    print()
+        print('\033[92m')
+        print("»› Dados da venda atualizados com sucesso!")
+        print('\033[0m')
+        
+        sair = input('»› Deseja sair do módulo "Atualizar Venda" (S/N)? ').lower()
+        print()
+        if sair == "n":
+            id_venda = funcoes.ler_codigo('Digite o ID de cadastro da venda: ', vendas)
+        
     input("»› Tecle <ENTER> para continuar... ")
 
 
@@ -115,17 +123,22 @@ def deletar_venda():
     sair = "n"
     while sair == "n":
         exibir_venda(id_venda)
-        resp = input("\n»› Tem certeza que deseja excluir esta venda (S/N)? ").lower()
-
+        print('\033[33m')
+        resp = input("\n»› Tem certeza que deseja deletar esta venda (S/N)? ").lower()
+        print('\033[0m')
         if resp == "s":
             del vendas[id_venda]
-            print("\n»› Venda excluida com sucesso! ")
+            print('\033[92m')
+            print("\n»› Venda deletada com sucesso! ")
+            print('\033[0m')
         else:
-            print("\n»› Não foi possível excluir a venda. ")
+            print('\033[91m')
+            print("»› Não foi possível deletar a venda. ")
+            print('\033[0m')
 
-        sair = input('\n»› Deseja sair do módulo "Deletar Venda" (S/N)? ').lower()
+        sair = input('»› Deseja sair do módulo "Deletar Venda" (S/N)? ').lower()
         print()
         if sair == "n":
             id_venda = funcoes.ler_codigo('Digite o ID de cadastro da venda: ', vendas)
-    print()
+
     input("»› Tecle <ENTER> para continuar... ")

@@ -1,8 +1,8 @@
-import pickle
-from random import randint
 import re
-from validacoes import validacoes
+import pickle
 import interfaces as ifc
+from random import randint
+from validacoes import validacoes
 from dicionarios import clientes, produtos, vendas, formas_pagamento
 
 
@@ -28,8 +28,10 @@ def ler_nome():
     print()
     nome = input("››››› Nome: ")
     while not validacoes.validar_nome(nome):
+        print('\033[91m')
         print("»› Ops! Algo deu errado! \n»› Digite apenas letras. Tente novamente...")
-        print()
+        print('\033[0m')
+        
         nome = input("››››› Nome: ")
     nome = nome.strip().title()
     nome = re.sub(r"\s+", " ", nome)
@@ -40,8 +42,10 @@ def ler_nome_regex():
     print()
     nome = input("››››› Nome: ")
     while not validacoes.validar_nome_regex(nome):
+        print('\033[91m')
         print("»› Ops! Algo deu errado! \n»› Digite apenas letras. Tente novamente...")
-        print()
+        print('\033[0m')
+        
         nome = input("››››› Nome: ")
     return nome
 
@@ -50,8 +54,10 @@ def ler_telefone():
     print()
     tel = input("››››› Telefone (somente números): ")
     while not (validacoes.validar_telefone(tel)):
+        print('\033[91m')
         print("»› Ops! Algo deu errado! \n»› Digite apenas números. Tente novamente...")
-        print()
+        print('\033[0m')
+        
         tel = input("››››› Telefone (somente números): ")
     return tel
 
@@ -60,10 +66,10 @@ def ler_email():
     print()
     email = input("››››› Email: ")
     while not (validacoes.validar_email(email)):
-        print(
-            "»› Ops! Algo deu errado! \n»› Digite um email válido. Tente novamente..."
-        )
-        print()
+        print('\033[91m')
+        print("»› Ops! Algo deu errado! \n»› Digite um email válido. Tente novamente...")
+        print('\033[0m')
+        
         email = input("››››› Email: ")
     return email
 
@@ -72,8 +78,10 @@ def ler_quantidade():
     print()
     qtd = input("››››› Quantidade (somente números): ")
     while not validacoes.validar_quantidade(qtd):
+        print('\033[91m')
         print("»› Ops! Algo deu errado! \n»› Digite apenas números. Tente novamente...")
-        print()
+        print('\033[0m')
+        
         qtd = input("››››› Quantidade (somente números): ")
     return qtd
 
@@ -82,8 +90,10 @@ def ler_preco():
     print()
     preco = input("››››› Preço da Unidade (00,00): ")
     while not validacoes.validar_preco(preco):
+        print('\033[91m')
         print("»› Ops! Algo deu errado! \n»› Siga o padrão (00,00). Tente novamente...")
-        print()
+        print('\033[0m')
+        
         preco = input("››››› Preço da Unidade (00,00): ")
     return preco
 
@@ -92,10 +102,10 @@ def ler_cidade():
     print()
     cidade = input("››››› Cidade (inclua os acentos): ").upper()
     while not validacoes.validar_cidade(cidade):
-        print(
-            "»› Ops! Essa cidade não existe no Brasil. \n»› Lembre de incluir os acentos. Tente novamente..."
-        )
-        print()
+        print('\033[91m')
+        print("»› Ops! Essa cidade não existe no Brasil. \n»› Lembre de incluir os acentos. Tente novamente...")
+        print('\033[0m')
+        
         cidade = input("››››› Cidade (inclua os acentos): ").upper()
     return cidade
 
@@ -104,10 +114,10 @@ def ler_logradouro(parte):
     print()
     logra = input(f"››››› {parte}: ")
     while not validacoes.validar_logradouro(logra):
-        print(
-            '»› Ops! Algo deu errado! \n»› Digite apenas letras, números e "-". Tente novamente...'
-        )
-        print()
+        print('\033[91m')
+        print('»› Ops! Algo deu errado! \n»› Digite apenas letras, números e "-". Tente novamente...')
+        print('\033[0m')
+        
         logra = input(f"››››› {parte}: ")
     logra = logra.strip().title()
     logra = re.sub(r"\s+", " ", logra)
@@ -118,8 +128,10 @@ def ler_codigo(texto, dicio):
     print()
     codigo = input(f"››››› {texto}")
     while not validacoes.validar_codigo(dicio, codigo):
+        print('\033[91m')
         print("»› Ops! Algo deu errado! \n»› Tem certeza que este é código certo? Tente novamente...")
-        print()
+        print('\033[0m')
+        
         codigo = input(f"››››› {texto}")
     return codigo
 
@@ -129,9 +141,11 @@ def ler_form_pag():
     forma_pagamento = input("››››› Forma de pagamento: \n››››› 1 - Cartão de Débito \n››››› 2 - Cartão de Crédito \n››››› 3 - Espécie \n››››› 4 - PIX \n: ")
     
     while not validacoes.validar_codigo(formas_pagamento, forma_pagamento):
-        print("\n»› Ops! Algo deu errado! \n»› Escolha uma forma de pagamento válida. Tente novamente...")
+        print('\033[91m')
+        print("»› Ops! Algo deu errado! \n»› Escolha uma forma de pagamento válida. Tente novamente...")
+        print('\033[0m')
         
-        forma_pagamento = input("\n››››› Forma de pagamento: \n››››› 1 - Cartão de Débito \n››››› 2 - Cartão de Crédito \n››››› 3 - Espécie \n››››› 4 - PIX \n: ")
+        forma_pagamento = input("››››› Forma de pagamento: \n››››› 1 - Cartão de Débito \n››››› 2 - Cartão de Crédito \n››››› 3 - Espécie \n››››› 4 - PIX \n: ")
         
     return forma_pagamento
 

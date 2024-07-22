@@ -1,6 +1,6 @@
+import funcoes
 import interfaces as ifc
 from dicionarios import produtos
-import funcoes
 
 
 def exibir_produto(id_produto):
@@ -8,7 +8,7 @@ def exibir_produto(id_produto):
     produto = produtos[id_produto][0]
     quantidade = produtos[id_produto][1]
     preco = produtos[id_produto][2]
-    print('»› Informações do Produto ‹«')
+    print('‹♥› Informações do Produto ‹♥›')
     print(f"»› Nome do produto: {produto}")
     print(f"»› Quantidade: {quantidade}")
     print(f"»› Preço da Unidade: R$ {preco}")
@@ -33,8 +33,10 @@ def cadastrar_produto():
 
     print()
     exibir_produto(id_produto)
-    print("\n»› Produto cadastrado com sucesso!!")
-    print()
+    print('\033[92m')
+    print("»› Produto cadastrado com sucesso!!")
+    print('\033[0m')
+
     input("»› Tecle <ENTER> para continuar... ")
 
 
@@ -43,17 +45,13 @@ def pesquisar_produto():
     id_produto = funcoes.ler_codigo('Digite o ID de cadastro do produto: ', produtos)
     sair = 'n'
     while sair == 'n':
-        if id_produto in produtos.keys():
-            exibir_produto(id_produto)
-        else:
-            print("\n»› Não foi possível achar o produto. Tem certeza que ele está cadastrado? ")
+        exibir_produto(id_produto)
         
-        sair = input('\n»› Deseja sair do módulo "Pesquisar Produto" (S/N)? ').lower()
+        sair = input('»› Deseja sair do módulo "Pesquisar Produto" (S/N)? ').lower()
         print()
         if sair == "n":
             id_produto = funcoes.ler_codigo('Digite o ID de cadastro do produto: ', produtos)
 
-    print()
     input("»› Tecle <ENTER> para continuar... ")
 
 
@@ -62,24 +60,23 @@ def atualizar_produto():
     id_produto = funcoes.ler_codigo('Digite o ID de cadastro do produto: ', produtos)
     sair = 'n'
     while sair == 'n':
-        if id_produto in produtos.keys():
-            nome_produto = funcoes.ler_nome()
-            qtd_produto = funcoes.ler_quantidade()
-            preco_produto = funcoes.ler_preco()
+        nome_produto = funcoes.ler_nome()
+        qtd_produto = funcoes.ler_quantidade()
+        preco_produto = funcoes.ler_preco()
 
-            produtos[id_produto] = [nome_produto, qtd_produto, preco_produto]
-
-            print()
-            exibir_produto(id_produto)
-            print()
-        else:
-            print("\n»› Não foi possível encontrar o produto. Tem certeza que ele está cadastrado?")
-            
-        sair = input('\n»› Deseja sair do módulo "Atualizar Produto" (S/N)? ').lower()
+        produtos[id_produto] = [nome_produto, qtd_produto, preco_produto]
+        
+        print("‹♥› Novos dados do produto ‹♥›")
+        exibir_produto(id_produto)
+        print('\033[92m')
+        print("»› Dados do produto atualizados com sucesso!")
+        print('\033[0m')
+        
+        sair = input('»› Deseja sair do módulo "Atualizar Produto" (S/N)? ').lower()
         print()
         if sair == "n":
             id_produto = funcoes.ler_codigo('Digite o ID de cadastro do produto: ', produtos)
-    print()
+
     input("»› Tecle <ENTER> para continuar... ")
 
 
@@ -88,22 +85,23 @@ def deletar_produto():
     id_produto = funcoes.ler_codigo('Digite o ID de cadastro do produto: ', produtos)
     sair = 'n'
     while sair == 'n':
-        if id_produto in produtos.keys():
-            exibir_produto(id_produto)
-
-            resp = input("\n»› Tem certeza que deseja excluir este produto (S/N)? ").lower()
-
-            if resp == "s":
-                del produtos[id_produto]
-                print("\n»› Produto excluido com sucesso! ")
-            else:
-                print("\n»› Não foi possível excluir o produto. ")
+        exibir_produto(id_produto)
+        print('\033[33m')
+        resp = input("\n»› Tem certeza que deseja deletar este produto (S/N)? ").lower()
+        print('\033[0m')
+        if resp == "s":
+            del produtos[id_produto]
+            print('\033[92m')
+            print("\n»› Produto deletado com sucesso! ")
+            print('\033[0m')
         else:
-            print("\n»› Produto não encotrado. Tem certeza que ele está cadastrado?")
+            print('\033[91m')
+            print("\n»› Não foi possível deletar o produto. ")
+            print('\033[0m')
             
-        sair = input('\n»› Deseja sair do módulo "Deletar Produto" (S/N)? ').lower()
+        sair = input('»› Deseja sair do módulo "Deletar Produto" (S/N)? ').lower()
         print()
         if sair == "n":
             id_produto = funcoes.ler_codigo('Digite o ID de cadastro do produto: ', produtos)
-    print()
+
     input("»› Tecle <ENTER> para continuar... ")

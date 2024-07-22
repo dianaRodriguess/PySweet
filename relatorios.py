@@ -14,10 +14,7 @@ def ver_clientes():
         bairro = endereco['bairro']
         num_casa = endereco['num_casa']
         logradouro = f'R. {rua} {num_casa}, {bairro}'
-        
-        logradouro = funcoes.truncate_string(logradouro, 26)
-        clientes[cliente][0] = funcoes.truncate_string(clientes[cliente][0], 26)
-        clientes[cliente][2] = funcoes.truncate_string(clientes[cliente][2], 26)
+    
         print('| %-8s ' % (cliente), end='')
         print('| %-27s ' % (clientes[cliente][0]), end='')
         print('| %-15s ' % (tel), end='')
