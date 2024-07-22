@@ -26,7 +26,7 @@ def ver_clientes():
         print('| %-22s |' % (cidade))
         print('|══════════|═════════════════════════════|═════════════════|════════════════════════════|═══════════════════════════════|════════════════════════|')
     print()
-    input('Tecle <ENTER> para continuar... ')
+    input('»› Tecle <ENTER> para continuar... ')
 
 
 def ver_vendas():
@@ -48,7 +48,7 @@ def ver_vendas():
         '|══════════|════════════════════════════|═════════════════════════|═══════════════|══════════════════|════════════|════════════════════|'
     )
     print()
-    input('Tecle <ENTER> para continuar... ')
+    input('»› Tecle <ENTER> para continuar... ')
 
 
 def ver_produtos():
@@ -62,7 +62,7 @@ def ver_produtos():
         '|══════════|═════════════════════════════|════════════════════|═════════════════|'
     )
     print()
-    input('Tecle <ENTER> para continuar... ')
+    input('»› Tecle <ENTER> para continuar... ')
 
 
 def prdt_mais_vend():
@@ -77,14 +77,21 @@ def prdt_mais_vend():
             produtos_vendidos[id_produto] = qtd_vendida
     lista_quantidade = list(produtos_vendidos.values())
     lista_quantidade.sort(reverse=True)
-    for i in range(5):
-        for p in produtos_vendidos:
-            if produtos_vendidos[p] == lista_quantidade[i]:
-                print('| %-27s ' % produtos[p][0], end='')
-                print('| %-18s |' % produtos_vendidos[p])
-    print('|═════════════════════════════|════════════════════|')
+    try:
+        for i in range(5):
+            for p in produtos_vendidos:
+                if produtos_vendidos[p] == lista_quantidade[i]:
+                    print('| %-27s ' % produtos[p][0], end='')
+                    print('| %-18s |' % produtos_vendidos[p])
+        print('|═════════════════════════════|════════════════════|')
+    except IndexError:
+        print('|═════════════════════════════|════════════════════|')
+        
+        print('\033[93m')
+        print('\n»› Ops! Não é possível mostrar os cinco produtos que mais vendem. \n»› Não há vendas o suficiente.')
+        print('\033[0m')
     print()
-    input('Tecle <ENTER> para continuar... ')
+    input('»› Tecle <ENTER> para continuar... ')
 
 
 def maiores_compradores():
@@ -99,11 +106,17 @@ def maiores_compradores():
             maiores_compradores[id_cliente] = qtd_vendida
     lista_quantidade = list(maiores_compradores.values())
     lista_quantidade.sort(reverse=True)
-    for i in range(5):
-        for c in maiores_compradores:
-            if maiores_compradores[c] == lista_quantidade[i]:
-                print('| %-27s ' % clientes[c][0], end='')
-                print('| %-18s |' % maiores_compradores[c])
-    print('|═════════════════════════════|════════════════════|')
+    try:
+        for i in range(5):
+            for c in maiores_compradores:
+                if maiores_compradores[c] == lista_quantidade[i]:
+                    print('| %-27s ' % clientes[c][0], end='')
+                    print('| %-18s |' % maiores_compradores[c])
+        print('|═════════════════════════════|════════════════════|')
+    except IndexError:
+        print('|═════════════════════════════|════════════════════|')
+        print('\033[93m')
+        print('\n»› Ops! Não é possível mostrar os cinco maiores compradores. \n»› Não há vendas o suficiente.')
+        print('\033[0m')
     print()
-    input('Tecle <ENTER> para continuar... ')
+    input('»› Tecle <ENTER> para continuar... ')
