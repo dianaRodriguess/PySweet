@@ -77,6 +77,8 @@ while op_mprinc != '0':
                         relatorios.prdt_mais_vend()
                     case '5':
                         relatorios.maiores_compradores()
+                    case '6':
+                        relatorios.checar_estoque()
         case '6':  # MÓDULO INFORMAÇOES
             funcoes.informacoes()
 
