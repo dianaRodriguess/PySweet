@@ -13,7 +13,7 @@ def exibir_cliente(id_cliente):
     bairro = endereco["bairro"]
     num_casa = endereco["num_casa"]
     logradouro = f"R. {rua} {num_casa}, {bairro}"
-    print('»› Informações do Cliente ‹«')
+    print('‹♥› Informações do Cliente ‹♥›')
     print(f"»› Nome: {cliente}")
     print(f"»› Telefone: {telefone}")
     print(f"»› Email: {email}")
@@ -47,8 +47,10 @@ def cadastrar_cliente():
     ]
 
     exibir_cliente(id_cliente)
+    print('\033[92m')
     print("»› Cliente cadastrado com sucesso!")
-    print()
+    print('\033[0m')
+
     input("»› Tecle <ENTER> para continuar... ")
 
 
@@ -59,11 +61,11 @@ def pesquisar_cliente():
     while sair == "n":
         exibir_cliente(id_cliente)
 
-        sair = input('\n»› Deseja sair do módulo "Pesquisar Cliente" (S/N)? ').lower()
+        sair = input('»› Deseja sair do módulo "Pesquisar Cliente" (S/N)? ').lower()
         print()
         if sair == "n":
             id_cliente = funcoes.ler_codigo('Digite o ID de cadastro do cliente: ', clientes)
-    print()
+            
     input("»› Tecle <ENTER> para continuar... ")
 
 
@@ -91,15 +93,17 @@ def atualizar_cliente():
                 "num_casa": num_casa_cliente,
             },
         ]
-        print("»› Novos dados do cliente: ")
+        print("‹♥› Novos dados do cliente ‹♥›")
         exibir_cliente(id_cliente)
-        print("»› Dados do cliente atualizado com sucesso!")
+        print('\033[92m')
+        print("»› Dados do cliente atualizados com sucesso!")
+        print('\033[0m')
 
-        sair = input('\n»› Deseja sair do módulo "Atualizar Cliente" (S/N)? ').lower()
+        sair = input('»› Deseja sair do módulo "Atualizar Cliente" (S/N)? ').lower()
         print()
         if sair == "n":
             id_cliente = funcoes.ler_codigo('Digite o ID de cadastro do cliente: ', clientes)
-    print()
+
     input("»› Tecle <ENTER> para continuar... ")
 
 
@@ -109,17 +113,22 @@ def deletar_cliente():
     sair = "n"
     while sair == "n":
         exibir_cliente(id_cliente)
-        resp = input("»› Tem certeza que deseja remover este cliente (S/N)? ").lower()
-
-        if resp != "n":
+        print('\033[33m')
+        resp = input("»› Tem certeza que deseja deletar este cliente (S/N)? ").lower()
+        print('\033[0m')
+        if resp == "s":
             del clientes[id_cliente]
-            print("»› Cliente excluido com sucesso! ")
+            print('\033[92m')
+            print("»› Cliente deletado com sucesso! ")
+            print('\033[0m')
         else:
-            print("»› Não foi possível excluir o cliente. ")
+            print('\033[91m')
+            print("»› Não foi possível deletar o cliente. ")
+            print('\033[0m')
 
-        sair = input('\n»› Deseja sair do módulo "Deletar Cliente" (S/N)? ').lower()
+        sair = input('»› Deseja sair do módulo "Deletar Cliente" (S/N)? ').lower()
         print()
         if sair == "n":
             id_cliente = funcoes.ler_codigo('Digite o ID de cadastro do cliente: ', clientes)
-    print()
+
     input("»› Tecle <ENTER> para continuar... ")
