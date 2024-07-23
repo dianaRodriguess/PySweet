@@ -11,7 +11,7 @@ def exibir_venda(id_venda):
     produto_vendidos = vendas[id_venda][0]
     qtd_vendida = vendas[id_venda][2]
     forma_pagamento = formas_pagamento[vendas[id_venda][3]]
-    valor_total = vendas[id_venda][4]
+    valor_total = f"{float(vendas[id_venda][4]):.2f}"
     data = vendas[id_venda][5]
     print('‹♥› Informações da Venda ‹♥›')
     print("-------------------------------------------------------------------------------")
@@ -29,7 +29,7 @@ def exibir_venda(id_venda):
     print(f"\n»› Nome do cliente: {cliente}")
     print(f"»› Itens Totais: {qtd_vendida}")
     print(f"»› Forma de pagamento: {forma_pagamento}")
-    print(f"»› Valor Total R$: {valor_total:.2f}")
+    print(f"»› Valor Total R$: {valor_total}")
     print(f"»› Data: {data}")
     print("»› ID de cadastro: ", id_venda)
     print()
