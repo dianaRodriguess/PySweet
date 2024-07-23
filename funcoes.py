@@ -95,6 +95,7 @@ def ler_preco():
         print('\033[0m')
         
         preco = input("››››› Preço da Unidade (00,00): ")
+    preco = preco.replace(",", ".")
     return preco
 
 
