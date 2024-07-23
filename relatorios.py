@@ -1,7 +1,7 @@
 import os
 import funcoes 
 import interfaces as ifc
-from dicionarios import clientes, produtos, vendas
+from dicionarios import clientes, produtos, vendas, formas_pagamento
 
 
 def ver_clientes():
@@ -35,21 +35,22 @@ def ver_vendas():
     # print(vendas)
     # produto = funcoes.truncate_string(produtos[vendas[venda][0]][0], 23)
     for venda in vendas:
-        print('|══════════|════════════════════════════|════════════════|══════════════════|═══════════════|════════════════════|')
-        print('|    ID    |          Comprador         |  Total Itens   |  Form.Pagamento  |  Valor Total  |        Data        |')
-        print('|══════════|════════════════════════════|════════════════|══════════════════|═══════════════|════════════════════|')
+        print('|══════════|════════════════════════════|════════════════|════════════════════|═══════════════|════════════════════|')
+        print('|    ID    |          Comprador         |  Total Itens   |   Form.Pagamento   |  Valor Total  |        Data        |')
+        print('|══════════|════════════════════════════|════════════════|════════════════════|═══════════════|════════════════════|')
         cliente = funcoes.truncate_string(clientes[vendas[venda][1]][0], 26)
+        forma_pag = formas_pagamento[vendas[venda][3]]
         produtos_vend = vendas[venda][0]
         valor = f"RS$ {float(vendas[venda][4]):.2f}"
         # valor = f'{valor:.2f}'
         print('| %-8s ' % (venda), end='')
         print('| %-26s ' % (cliente), end='')
         print('| %-14s ' % (vendas[venda][2]), end='')
-        print('| %-16s ' % (vendas[venda][3]), end='')
+        print('| %-18s ' % (forma_pag), end='')
         print('| %-13s ' % (valor), end='')
         print('| %-16s |' % (vendas[venda][5]))
         # print('| %-23s ' % (vendas[venda][0]), end='')
-        print('|════════════════════════════════════════════════════════════════════════════════════════════════════════════════|')
+        print('|══════════════════════════════════════════════════════════════════════════════════════════════════════════════════|')
         print('\33[92m')
         ifc.interface_prdt_vend(venda)
         for prod, detalhes in produtos_vend.items(): 
@@ -57,12 +58,12 @@ def ver_vendas():
             prec = 'RS$ ' + detalhes[1]
             nome_produto = funcoes.truncate_string(produtos[prod][0], 35)
             print('| %-17s ' % (prod), end='')
-            print('| %-36s ' % (nome_produto), end='')
+            print('| %-38s ' % (nome_produto), end='')
             print('| %-15s ' % (quant), end='')
             print('| %-33s |' % (prec))
-            print('|════════════════════════════════════════════════════════════════════════════════════════════════════════════════|')
+            print('|══════════════════════════════════════════════════════════════════════════════════════════════════════════════════|')
         print('\33[0m')
-    print('|════════════════════════════════════════════════════════════════════════════════════════════════════════════════|')
+    print('|══════════════════════════════════════════════════════════════════════════════════════════════════════════════════|')
     print()
     input('»› Tecle <ENTER> para continuar... ')
 
@@ -73,7 +74,7 @@ def ver_produtos():
         nome_produto = funcoes.truncate_string(produtos[produto][0], 26)
         print('| %-8s ' % (produto), end='')
         print('| %-27s ' % (nome_produto), end='')
-        print('| %-18s ' % (produtos[produto][1]), end='')
+        print('| %-17s ' % (produtos[produto][1]), end='')
         print('| %-15s |' % (produtos[produto][2]))
     print(
         '|══════════|═════════════════════════════|════════════════════|═════════════════|'
