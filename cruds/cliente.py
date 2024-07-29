@@ -92,10 +92,11 @@ def pesquisar_cliente():
                     print('| %-29s ' % (logradouro), end='')
                     print('| %-22s |' % (cidade))
             print('|══════════|═════════════════════════════|═════════════════|════════════════════════════|═══════════════════════════════|════════════════════════|')
-    detalhe = input('Quer informações detalhadas de um cliente (S/N)? ').lower()
-    if detalhe == 's':
-        id_cliente = funcoes.ler_codigo('Digite o ID de cadastro do cliente: ', clientes)
-        exibir_cliente(id_cliente)
+        # Tem que ser dentro do else
+        detalhe = input('Quer informações detalhadas de um cliente (S/N)? ').lower()
+        if detalhe == 's':
+            id_cliente = funcoes.ler_codigo('Digite o ID de cadastro do cliente: ', clientes)
+            exibir_cliente(id_cliente)
     
     input("\n»› Tecle <ENTER> para continuar... ")
 
