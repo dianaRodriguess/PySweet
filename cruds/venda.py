@@ -48,13 +48,7 @@ def cadastrar_venda():
     produtos_vendidos = {}
     sair_1 = 'n'
     while sair_1 == 'n':
-        nome_produto = input('Digite o nome do produto: ')
-        while not funcoes.nome_indicio(nome_produto, produtos):
-            print('\033[91m')
-            print("»› Ops! Algo deu errado! \n»› Tem certeza que este é código certo? Tente novamente...")
-            print('\033[0m')
-            nome_produto = input('\nDigite o nome do produto: ')
-        id_produto = funcoes.nome_pra_codigo(nome_produto, produtos)  # Recebe ID do produto
+        id_produto = funcoes.ler_codigo("ID do produto: ", produtos)  # Ler ID do produto
         qtd_vend_produto = funcoes.ler_quantidade()  # Ler quantidade vendida do produo
         
         qdt_atual = pdt.atualizar_quantidade(id_produto, int(qtd_vend_produto))  # Atualiza a quantidade no dicionario
@@ -64,16 +58,9 @@ def cadastrar_venda():
         produtos_vendidos[id_produto] = [qtd_vend_produto, valor_produto] 
         
         sair_1 = input('SAIR (S/N): ').lower()  # Controle
-        # id_produto = funcoes.ler_codigo("ID do produto: ", produtos)  # Ler ID do produto
         
         if sair_1 == 'n':
-            nome_produto = input('Digite o nome do produto: ')
-            while not funcoes.nome_indicio(nome_produto, produtos):
-                print('\033[91m')
-                print("»› Ops! Algo deu errado! \n»› Tem certeza que este é nome certo? Tente novamente...")
-                print('\033[0m')
-                nome_produto = input('\nDigite o nome do produto: ')
-            id_produto = funcoes.nome_pra_codigo(nome_produto, produtos)
+            id_produto = funcoes.ler_codigo("ID do produto: ", produtos)
             qtd_vend_produto = funcoes.ler_quantidade()
             
             qdt_atual = pdt.atualizar_quantidade(id_produto, int(qtd_vend_produto))
