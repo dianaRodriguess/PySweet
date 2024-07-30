@@ -48,13 +48,12 @@ def cadastrar_venda():
     produtos_vendidos = {}
     sair_1 = 'n'
     while sair_1 == 'n':
-        nome_produto = input('››››› Digite o nome do produto: ')  # Ler nome do produto
-        while not funcoes.nome_indicio(nome_produto, produtos):  # Valida se o nome do produto existe no dicionario produtos
+        nome_produto = input('Digite o nome do produto: ')
+        while not funcoes.nome_indicio(nome_produto, produtos):
             print('\033[91m')
             print("»› Ops! Algo deu errado! \n»› Tem certeza que este é código certo? Tente novamente...")
             print('\033[0m')
-            nome_produto = input('\n››››› Digite o nome do produto: ')
-            
+            nome_produto = input('\nDigite o nome do produto: ')
         id_produto = funcoes.nome_pra_codigo(nome_produto, produtos)  # Recebe ID do produto
         qtd_vend_produto = funcoes.ler_quantidade()  # Ler quantidade vendida do produo
         
@@ -62,40 +61,33 @@ def cadastrar_venda():
         produtos[id_produto][1] = qdt_atual
         valor_produto = valor_venda(id_produto, qtd_vend_produto)  # Calcula o valor do produto (preço * qtd_vend_produto)
         
-        produtos_vendidos[id_produto] = [qtd_vend_produto, valor_produto]  # Salva o(s) produto(s) vendido(s) desta venda
+        produtos_vendidos[id_produto] = [qtd_vend_produto, valor_produto] 
         
-        sair_1 = input('\nSAIR (S/N): \n').lower()  # Controle
+        sair_1 = input('SAIR (S/N): ').lower()  # Controle
+        # id_produto = funcoes.ler_codigo("ID do produto: ", produtos)  # Ler ID do produto
         
-        if sair_1 == 'n':  # Repete caso o usuario queira cadastrar mais produtos
-            nome_produto = input('››››› Digite o nome do produto: ')  # Ler nome do produto
-            while not funcoes.nome_indicio(nome_produto, produtos):  # Valida se o nome do produto existe no dicionario produtos
+        if sair_1 == 'n':
+            nome_produto = input('Digite o nome do produto: ')
+            while not funcoes.nome_indicio(nome_produto, produtos):
                 print('\033[91m')
                 print("»› Ops! Algo deu errado! \n»› Tem certeza que este é nome certo? Tente novamente...")
                 print('\033[0m')
-                nome_produto = input('\n››››› Digite o nome do produto: ')
+                nome_produto = input('\nDigite o nome do produto: ')
+            id_produto = funcoes.nome_pra_codigo(nome_produto, produtos)
+            qtd_vend_produto = funcoes.ler_quantidade()
             
-            id_produto = funcoes.nome_pra_codigo(nome_produto, produtos)  # Recebe ID do produto
-            qtd_vend_produto = funcoes.ler_quantidade()  # Ler quantidade vendida do produo
-            
-            qdt_atual = pdt.atualizar_quantidade(id_produto, int(qtd_vend_produto))  # Atualiza a quantidade no dicionario
+            qdt_atual = pdt.atualizar_quantidade(id_produto, int(qtd_vend_produto))
             produtos[id_produto][1] = qdt_atual
-            valor_produto = valor_venda(id_produto, qtd_vend_produto)  # Calcula o valor do produto (preço * qtd_vend_produto)
+            valor_produto = valor_venda(id_produto, qtd_vend_produto)
             
-            produtos_vendidos[id_produto] = [qtd_vend_produto, valor_produto]  # Salva o(s) produto(s) vendido(s) desta venda
+            produtos_vendidos[id_produto] = [qtd_vend_produto, valor_produto]
             
-            sair_1 = input('\nSAIR (S/N): \n').lower()
+            sair_1 = input('SAIR (S/N): ').lower()
     
-    nome_cliente = input('››››› Digite o nome do cliente: ')  # Ler nome do cliente
-    while not funcoes.nome_indicio(nome_cliente, clientes):  # Valida se o nome do cliente existe no dicionario clientes
-        print('\033[91m')
-        print("»› Ops! Algo deu errado! \n»› Tem certeza que este é nome certo? Tente novamente...")
-        print('\033[0m')
-        nome_cliente = input('\n››››› Digite o nome do cliente: ')
+    id_cliente = funcoes.ler_codigo("ID do cliente: ", clientes) 
+    forma_pagamento = funcoes.ler_form_pag()
     
-    id_cliente = funcoes.nome_pra_codigo(nome_cliente, clientes) # Recebe ID do cliente
-    forma_pagamento = funcoes.ler_form_pag()  # Ler a forma de pagamento
-    
-    # Calcula a quantidade total vendida e o valor total da venda
+    # Calcula o total da quantidade vendida e do valor
     qtd_vendida = 0
     valor_total = 0
     for items in produtos_vendidos.values():
@@ -103,10 +95,10 @@ def cadastrar_venda():
         valor_total += float(items[1])
         
 
-    data = datetime.now()  # Pega a data e a hora do sistema
+    data = datetime.now()
 
-    id_venda = funcoes.gerar_codigo(vendas)  # Gera o código da venda
-    vendas[id_venda] = [  # Salva a venda no dicionário
+    id_venda = funcoes.gerar_codigo(vendas)
+    vendas[id_venda] = [
         produtos_vendidos,
         id_cliente,
         str(qtd_vendida),
@@ -114,7 +106,7 @@ def cadastrar_venda():
         str(valor_total),
         data.strftime("%x, %X"),
     ]
-    exibir_venda(id_venda) # Exibe a venda para o usuário verificar as informações
+    exibir_venda(id_venda)
     print('\033[92m')
     print("»› Venda cadastrada com sucesso!")
     print('\033[0m')
