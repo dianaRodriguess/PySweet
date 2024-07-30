@@ -42,32 +42,13 @@ def cadastrar_produto():
 
 def pesquisar_produto():
     ifc.cabecalho_modulos("Pesquisar Produto")
-    nome_prod = input('Digite o nome do produto: ').lower()
-    lista_nomes = []
     
-    for codigo in produtos:
-        nome_produto = produtos[codigo][0].lower()
-        # print(nome_produto)
-        if nome_prod in nome_produto:
-            lista_nomes.append(nome_produto)
-    # print(lista_nomes)
-    if not lista_nomes:
-        print('\nNÃO HÁ PRODUTOS COM ESSE NOME\n')
-    else:
-        ifc.interface_pesquisar_produtos()
-        for nome in lista_nomes:
-            for p in produtos:
-                if nome.lower() == produtos[p][0].lower():
-                    nome_produto = funcoes.truncate_string(produtos[p][0], 26)
-                    print('| %-8s ' % (p), end='')
-                    print('| %-27s ' % (nome_produto), end='')
-                    print('| %-18s ' % (produtos[p][1]), end='')
-                    print('| %-15s |' % (produtos[p][2]))
-            print('|══════════|═════════════════════════════|════════════════════|═════════════════|')
-        detalhe = input('\n»› Quer informações detalhadas de um produto (S/N)? ').lower()
-        if detalhe == 's':
-            id_produto = funcoes.ler_codigo('Digite o ID de cadastro do produto: ', produtos)
-            exibir_produto(id_produto)
+    funcoes.pesquisar_nome_produto()
+    
+    detalhe = input('\n»› Quer informações detalhadas de um produto (S/N)? ').lower()
+    if detalhe == 's':
+        id_produto = funcoes.ler_codigo('Digite o ID de cadastro do produto: ', produtos)
+        exibir_produto(id_produto)
         
     input("»› Tecle <ENTER> para continuar... ")
 

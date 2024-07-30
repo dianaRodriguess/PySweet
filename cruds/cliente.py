@@ -58,45 +58,12 @@ def cadastrar_cliente():
 def pesquisar_cliente():
     ifc.cabecalho_modulos("Pesquisar Cliente")
     
-    nome_cli = input('Digite o nome do cliente: ').lower()
-    lista_nomes = []
-        
-    for codigo in clientes:
-        nome_cliente = clientes[codigo][0].lower()
-        if nome_cli in nome_cliente:
-            lista_nomes.append(nome_cliente)  # se nome_cliente tem nome_cli, lista_nomes ganha nome_cliente 
-            
-    if not lista_nomes:  # se não há nada em lista_nomes, print ↓
-        print('\nNÃO HÁ CLIENTES COM ESSE NOME\n')
-    else:  # se tiver algo em lista_nomes
-        ifc.interface_pesquisar_clientes()
-        for nome in lista_nomes:
-            for c in clientes:
-                if nome.lower() == clientes[c][0].lower():  # compara o nome da lista com o nome guardado
-                    telefone = clientes[c][1]
-                    tel = f'({telefone[0:2]}) {telefone[2:7]}-{telefone[7:]}'
-                    endereco = clientes[c][3]
-                    rua = endereco['rua']
-                    bairro = endereco['bairro']
-                    num_casa = endereco['num_casa']
-                    
-                    cidade = funcoes.truncate_string(endereco['cidade'], 22)
-                    logradouro = funcoes.truncate_string(f'R. {rua} {num_casa}, {bairro}', 27)
-                    nome_cliente = funcoes.truncate_string(clientes[c][0], 26)
-                    email_cliente = funcoes.truncate_string(clientes[c][2], 26)
-                    
-                    print('| %-8s ' % (c), end='')
-                    print('| %-27s ' % (nome_cliente), end='')
-                    print('| %-15s ' % (tel), end='')
-                    print('| %-26s ' % (email_cliente), end='')
-                    print('| %-29s ' % (logradouro), end='')
-                    print('| %-22s |' % (cidade))
-            print('|══════════|═════════════════════════════|═════════════════|════════════════════════════|═══════════════════════════════|════════════════════════|')
-        # Tem que ser dentro do else
-        detalhe = input('Quer informações detalhadas de um cliente (S/N)? ').lower()
-        if detalhe == 's':
-            id_cliente = funcoes.ler_codigo('Digite o ID de cadastro do cliente: ', clientes)
-            exibir_cliente(id_cliente)
+    funcoes.pesquisar_nome_cliente()
+    # Tem que ser dentro do else
+    detalhe = input('\nQuer informações detalhadas de um cliente (S/N)? ').lower()
+    if detalhe == 's':
+        id_cliente = funcoes.ler_codigo('Digite o ID de cadastro do cliente: ', clientes)
+        exibir_cliente(id_cliente)
     
     input("\n»› Tecle <ENTER> para continuar... ")
 
