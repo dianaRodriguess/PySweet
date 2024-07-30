@@ -294,3 +294,24 @@ def pesquisar_nome_produto():
                     print('| %-18s ' % (produtos[p][1]), end='')
                     print('| %-15s |' % (produtos[p][2]))
             print('|══════════|═════════════════════════════|════════════════════|═════════════════|')
+
+
+##### CHECAR NOME #####
+def nome_indicio(nome, dicio):
+    nomes_dicio = []
+    for cod in dicio:
+        nomes_dicio.append(dicio[cod][0].lower())
+    
+    if nome.lower() not in nomes_dicio:
+        return False
+    return True
+
+##### NOME → CÓDIGO #####
+def nome_pra_codigo(nome, dicio):
+    codigo = ''
+    for cod in dicio:
+        # print(cod)
+        if nome.lower() == dicio[cod][0].lower():
+            codigo = cod
+            # print(codigo)
+    return codigo
