@@ -7,6 +7,7 @@ def exibir_cliente(id_cliente):
     print()
     cliente = clientes[id_cliente][0]
     telefone = clientes[id_cliente][1]
+    tel = f'({telefone[0:2]}) {telefone[2:7]}-{telefone[7:]}'
     email = clientes[id_cliente][2]
     endereco = clientes[id_cliente][3]
     rua = endereco["rua"]
@@ -15,7 +16,7 @@ def exibir_cliente(id_cliente):
     logradouro = f"R. {rua} {num_casa}, {bairro}"
     print('‹♥› Informações do Cliente ‹♥›')
     print(f"»› Nome: {cliente}")
-    print(f"»› Telefone: {telefone}")
+    print(f"»› Telefone: {tel}")
     print(f"»› Email: {email}")
     print(f'»› Cidade: {endereco["cidade"]}')
     print(f"»› Endereço: {logradouro}")
@@ -56,17 +57,15 @@ def cadastrar_cliente():
 
 def pesquisar_cliente():
     ifc.cabecalho_modulos("Pesquisar Cliente")
-    id_cliente = funcoes.ler_codigo('Digite o ID de cadastro do cliente: ', clientes)
-    sair = "n"
-    while sair == "n":
+    
+    funcoes.pesquisar_nome_cliente()
+    # Tem que ser dentro do else
+    detalhe = input('\nQuer informações detalhadas de um cliente (S/N)? ').lower()
+    if detalhe == 's':
+        id_cliente = funcoes.ler_codigo('Digite o ID de cadastro do cliente: ', clientes)
         exibir_cliente(id_cliente)
-
-        sair = input('»› Deseja sair do módulo "Pesquisar Cliente" (S/N)? ').lower()
-        print()
-        if sair == "n":
-            id_cliente = funcoes.ler_codigo('Digite o ID de cadastro do cliente: ', clientes)
-            
-    input("»› Tecle <ENTER> para continuar... ")
+    
+    input("\n»› Tecle <ENTER> para continuar... ")
 
 
 def atualizar_cliente():

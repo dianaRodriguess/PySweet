@@ -42,16 +42,14 @@ def cadastrar_produto():
 
 def pesquisar_produto():
     ifc.cabecalho_modulos("Pesquisar Produto")
-    id_produto = funcoes.ler_codigo('Digite o ID de cadastro do produto: ', produtos)
-    sair = 'n'
-    while sair == 'n':
+    
+    funcoes.pesquisar_nome_produto()
+    
+    detalhe = input('\n»› Quer informações detalhadas de um produto (S/N)? ').lower()
+    if detalhe == 's':
+        id_produto = funcoes.ler_codigo('Digite o ID de cadastro do produto: ', produtos)
         exibir_produto(id_produto)
         
-        sair = input('»› Deseja sair do módulo "Pesquisar Produto" (S/N)? ').lower()
-        print()
-        if sair == "n":
-            id_produto = funcoes.ler_codigo('Digite o ID de cadastro do produto: ', produtos)
-
     input("»› Tecle <ENTER> para continuar... ")
 
 

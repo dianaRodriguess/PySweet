@@ -95,6 +95,7 @@ def ler_preco():
         print('\033[0m')
         
         preco = input("››››› Preço da Unidade (00,00): ")
+    preco = preco.replace(",", ".")
     return preco
 
 
@@ -229,3 +230,88 @@ def gerar_codigo(dicio):
         codigo = randint(0, 999999)
         codigo_formatado = f"{codigo:06d}"
     return codigo_formatado
+
+
+##### PESQUISAR CLIENTE POR NOME #####
+def pesquisar_nome_cliente():
+    nome_cli = input('Digite o nome do cliente: ').lower()
+    lista_nomes = []
+        
+    for codigo in clientes:
+        nome_cliente = clientes[codigo][0].lower()
+        if nome_cli in nome_cliente:
+            lista_nomes.append(nome_cliente)  # se nome_cliente tem nome_cli, lista_nomes ganha nome_cliente 
+            
+    if not lista_nomes:  # se não há nada em lista_nomes, print ↓
+        print('\nNÃO HÁ CLIENTES COM ESSE NOME\n')
+    else:  # se tiver algo em lista_nomes
+        ifc.interface_pesquisar_clientes()
+        for nome in lista_nomes:
+            for c in clientes:
+                if nome.lower() == clientes[c][0].lower():  # compara o nome da lista com o nome guardado
+                    telefone = clientes[c][1]
+                    tel = f'({telefone[0:2]}) {telefone[2:7]}-{telefone[7:]}'
+                    endereco = clientes[c][3]
+                    rua = endereco['rua']
+                    bairro = endereco['bairro']
+                    num_casa = endereco['num_casa']
+                    
+                    cidade = truncate_string(endereco['cidade'], 22)
+                    logradouro = truncate_string(f'R. {rua} {num_casa}, {bairro}', 27)
+                    nome_cliente = truncate_string(clientes[c][0], 26)
+                    email_cliente = truncate_string(clientes[c][2], 26)
+                    
+                    print('| %-8s ' % (c), end='')
+                    print('| %-27s ' % (nome_cliente), end='')
+                    print('| %-15s ' % (tel), end='')
+                    print('| %-26s ' % (email_cliente), end='')
+                    print('| %-29s ' % (logradouro), end='')
+                    print('| %-22s |' % (cidade))
+            print('|══════════|═════════════════════════════|═════════════════|════════════════════════════|═══════════════════════════════|════════════════════════|')
+
+
+##### PESQUISAR PRODUTO POR NOME #####
+def pesquisar_nome_produto():
+    nome_prod = input('Digite o nome do produto: ').lower()
+    lista_nomes = []
+    
+    for codigo in produtos:
+        nome_produto = produtos[codigo][0].lower()
+        # print(nome_produto)
+        if nome_prod in nome_produto:
+            lista_nomes.append(nome_produto)
+    # print(lista_nomes)
+    if not lista_nomes:
+        print('\nNÃO HÁ PRODUTOS COM ESSE NOME\n')
+    else:
+        ifc.interface_pesquisar_produtos()
+        for nome in lista_nomes:
+            for p in produtos:
+                if nome.lower() == produtos[p][0].lower():
+                    nome_produto = truncate_string(produtos[p][0], 26)
+                    print('| %-8s ' % (p), end='')
+                    print('| %-27s ' % (nome_produto), end='')
+                    print('| %-18s ' % (produtos[p][1]), end='')
+                    print('| %-15s |' % (produtos[p][2]))
+            print('|══════════|═════════════════════════════|════════════════════|═════════════════|')
+
+
+##### CHECAR NOME #####
+def nome_indicio(nome, dicio):
+    nomes_dicio = []
+    for cod in dicio:
+        nomes_dicio.append(dicio[cod][0].lower())
+    
+    if nome.lower() not in nomes_dicio:
+        return False
+    return True
+
+##### NOME → CÓDIGO #####
+def nome_pra_codigo(nome, dicio):
+    codigo = ''
+    for cod in dicio:
+        # print(cod)
+        if nome.lower() == dicio[cod][0].lower():
+            codigo = cod
+            # print(codigo)
+    return codigo
