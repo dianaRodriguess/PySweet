@@ -86,32 +86,6 @@ def prdt_mais_vend():
     produtos_mais_vendidos = {}
     produtos_vendidos = {}
     for venda in vendas.values():
-<<<<<<< HEAD
-        # print(venda)
-        id_produto = venda[0]
-        qtd_vendida = int(venda[2])
-        # print(id_produto, qtd_vendida)
-        if id_produto in produtos_vendidos:
-            produtos_vendidos[id_produto] += qtd_vendida
-        else:
-            produtos_vendidos[id_produto] = qtd_vendida
-        # print(produtos_vendidos)
-    lista_quantidade = list(produtos_vendidos.values())
-    # print(lista_quantidade)
-    lista_quantidade.sort(reverse=True)
-    try: 
-        for i in range(5):
-            for p in produtos_vendidos:
-                # IndexError: list index out of range -> a lista é menor do que o range
-                if produtos_vendidos[p] == lista_quantidade[i]:
-                    print('| %-27s ' % produtos[p][0], end='')
-                    print('| %-18s |' % produtos_vendidos[p])
-        print('|═════════════════════════════|════════════════════|')
-    except IndexError:
-        print('|═════════════════════════════|════════════════════|')
-        print('\n»› Ops! Não é possível mostrar os cinco produtos mais vendidos. \n»› Não há vendas o suficiente.')
-        
-=======
         produtos_vendidos = venda[0]
         for produto, detalhes in produtos_vendidos.items():
             
@@ -138,7 +112,6 @@ def prdt_mais_vend():
         print('\033[93m')
         print('\n»› Ops! Não é possível mostrar os cinco produtos que mais vendem. \n»› Não há vendas o suficiente.')
         print('\033[0m')
->>>>>>> alter_test
     print()
     input('»› Tecle <ENTER> para continuar... ')
 
@@ -158,24 +131,13 @@ def maiores_compradores():
     try:
         for i in range(5):
             for c in maiores_compradores:
-<<<<<<< HEAD
-                # IndexError: list index out of range -> a lista é menor do que o range
-                if maiores_compradores[c] == lista_quantidade[i]:
-                    print('| %-27s ' % clientes[c][0], end='')
-=======
                 if maiores_compradores[c] == lista_quantidade[i]:
                     nome_cliente = funcoes.truncate_string(clientes[c][0], 27)
                     print('| %-27s ' % nome_cliente, end='')
->>>>>>> alter_test
                     print('| %-18s |' % maiores_compradores[c])
         print('|═════════════════════════════|════════════════════|')
     except IndexError:
         print('|═════════════════════════════|════════════════════|')
-<<<<<<< HEAD
-        print('\n»› Ops! Não é possível mostrar os cinco maiores compradores. \n»› Não há vendas o suficiente.')
-    print()
-    input('»› Tecle <ENTER> para continuar... ')
-=======
         print('\033[93m')
         print('\n»› Ops! Não é possível mostrar os cinco maiores compradores. \n»› Não há vendas o suficiente.')
         print('\033[0m')
@@ -226,4 +188,3 @@ def checar_estoque():
         print("-------------------------------------------------------------------------------")
         print('\033[0m')
     input("»› Tecle <ENTER> para continuar... ")   
->>>>>>> alter_test
