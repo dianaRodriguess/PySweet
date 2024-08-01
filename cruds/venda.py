@@ -48,6 +48,12 @@ def cadastrar_venda():
     produtos_vendidos = {}
     sair_1 = 'n'
     while sair_1 == 'n':
+        funcoes.pesquisar_nome_produto()
+        pergunta_1 = input('\nQuer pesquisar novamente (S/N)? ').lower()
+        while pergunta_1 != 'n':
+            funcoes.pesquisar_nome_produto()
+            pergunta_1 = input('\nQuer pesquisar novamente (S/N)? ').lower()
+            
         id_produto = funcoes.ler_codigo("ID do produto: ", produtos)  # Ler ID do produto
         qtd_vend_produto = funcoes.ler_quantidade()  # Ler quantidade vendida do produo
         
@@ -56,10 +62,16 @@ def cadastrar_venda():
         valor_produto = valor_venda(id_produto, qtd_vend_produto)  # Calcula o valor do produto (preço * qtd_vend_produto)
         
         produtos_vendidos[id_produto] = [qtd_vend_produto, valor_produto] 
-        
+    
         sair_1 = input('SAIR (S/N): ').lower()  # Controle
         
         if sair_1 == 'n':
+            funcoes.pesquisar_nome_produto()
+            pergunta_1 = input('\nQuer pesquisar novamente (S/N)? ').lower()
+            while pergunta_1 != 'n':
+                funcoes.pesquisar_nome_produto()
+                pergunta_1 = input('\nQuer pesquisar novamente (S/N)? ').lower()
+                
             id_produto = funcoes.ler_codigo("ID do produto: ", produtos)
             qtd_vend_produto = funcoes.ler_quantidade()
             
@@ -71,6 +83,12 @@ def cadastrar_venda():
             
             sair_1 = input('SAIR (S/N): ').lower()
     
+    funcoes.pesquisar_nome_cliente()
+    pergunta_2 = input('\nQuer pesquisar novamente (S/N)? ').lower()
+    while pergunta_2 != 'n':
+        funcoes.pesquisar_nome_cliente()
+        pergunta_2 = input('\nQuer pesquisar novamente (S/N)? ').lower()
+        
     id_cliente = funcoes.ler_codigo("ID do cliente: ", clientes) 
     forma_pagamento = funcoes.ler_form_pag()
     

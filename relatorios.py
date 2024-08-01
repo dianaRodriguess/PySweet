@@ -74,7 +74,7 @@ def ver_produtos():
         nome_produto = funcoes.truncate_string(produtos[produto][0], 26)
         print('| %-8s ' % (produto), end='')
         print('| %-27s ' % (nome_produto), end='')
-        print('| %-17s ' % (produtos[produto][1]), end='')
+        print('| %-18s ' % (produtos[produto][1]), end='')
         print('| %-15s |' % (produtos[produto][2]))
     print(
         '|══════════|═════════════════════════════|════════════════════|═════════════════|'
