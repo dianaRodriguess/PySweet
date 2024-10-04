@@ -1,4 +1,4 @@
-import funcoes
+import uteis.funcoes as funcoes
 import interfaces as ifc
 from datetime import datetime
 from cruds import produto as pdt
