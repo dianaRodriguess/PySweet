@@ -2,7 +2,7 @@ import re
 import pickle
 import interfaces as ifc
 from random import randint
-from validacoes import validacoes
+from uteis import validacoes
 from dicionarios import clientes, produtos, vendas, formas_pagamento
 
 
