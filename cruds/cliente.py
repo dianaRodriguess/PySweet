@@ -1,4 +1,4 @@
-import funcoes
+import uteis.funcoes as funcoes
 import interfaces as ifc
 from dicionarios import clientes
 

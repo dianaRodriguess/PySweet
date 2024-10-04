@@ -2,7 +2,7 @@ from cruds import cliente
 from cruds import venda
 from cruds import produto
 import relatorios
-import funcoes
+import uteis.funcoes as funcoes
 
 ######################################
 #####      Projeto PySweet       #####
